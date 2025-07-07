@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buổi 1: Giới thiệu khóa học phát triển web</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #e3f2fd 0%,
+          #bbdefb 50%,
+          #90caf9 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(33, 150, 243, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(13, 71, 161, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      .slide-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(33, 150, 243, 0.2);
+        width: 100%;
+        max-width: 1000px;
+        height: 700px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid rgba(33, 150, 243, 0.1);
+      }
+
+      .slide {
+        display: none;
+        height: 100%;
+        animation: slideIn 0.5s ease-in-out;
+      }
+
+      .slide.active {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Slide 1 - Giới thiệu */
+      /* Slide 1 - Giới thiệu */
+      .intro-slide {
+        background: linear-gradient(45deg, #0d47a1, #1976d2, #42a5f5, #64b5f6);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .intro-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 60%,
+            rgba(255, 255, 255, 0.08) 0%,
+            transparent 50%
+          );
+        animation: floatingOrbs 12s ease-in-out infinite;
+      }
+
+      @keyframes floatingOrbs {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        33% {
+          transform: translateY(-20px) rotate(120deg);
+        }
+        66% {
+          transform: translateY(10px) rotate(240deg);
+        }
+      }
+
+      .intro-slide::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%
+        );
+        animation: shimmer 3s ease-in-out infinite;
+        transform: translateX(-100%);
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .intro-content {
+        z-index: 10;
+        position: relative;
+        animation: contentFloat 6s ease-in-out infinite;
+      }
+
+      @keyframes contentFloat {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .club-name {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+          0 0 40px rgba(33, 150, 243, 0.8);
+        background: linear-gradient(45deg, #fff, #e3f2fd, #fff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: textGlow 4s ease-in-out infinite;
+        position: relative;
+      }
+
+      @keyframes textGlow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+          filter: brightness(1);
+        }
+        50% {
+          background-position: 100% 50%;
+          filter: brightness(1.2);
+        }
+      }
+
+      .club-name::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: sparkle 2s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes sparkle {
+        0% {
+          transform: translateX(-100%) rotate(30deg);
+        }
+        100% {
+          transform: translateX(100%) rotate(30deg);
+        }
+      }
+
+      .course-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #e3f2fd;
+        text-shadow: 0 0 15px rgba(227, 242, 253, 0.8);
+        animation: titlePulse 3s ease-in-out infinite;
+        position: relative;
+      }
+
+      @keyframes titlePulse {
+        0%,
+        100% {
+          transform: scale(1);
+          text-shadow: 0 0 15px rgba(227, 242, 253, 0.8);
+        }
+        50% {
+          transform: scale(1.05);
+          text-shadow: 0 0 25px rgba(227, 242, 253, 1);
+        }
+      }
+
+      .lesson-info {
+        font-size: 1.8rem;
+        font-weight: 500;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.1)
+        );
+        padding: 25px 50px;
+        border-radius: 25px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        animation: cardFloat 4s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      @keyframes cardFloat {
+        0%,
+        100% {
+          transform: translateY(0px) rotateX(0deg);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        50% {
+          transform: translateY(-8px) rotateX(2deg);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      .lesson-info::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        animation: lessonShine 3s ease-in-out infinite;
+      }
+
+      @keyframes lessonShine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      /* Particles animation */
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: particleFloat 8s linear infinite;
+      }
+
+      @keyframes particleFloat {
+        0% {
+          transform: translateY(100vh) translateX(0px);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) translateX(100px);
+          opacity: 0;
+        }
+      }
+
+      .particle:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(2) {
+        left: 20%;
+        animation-delay: 1s;
+        animation-duration: 8s;
+      }
+      .particle:nth-child(3) {
+        left: 30%;
+        animation-delay: 2s;
+        animation-duration: 7s;
+      }
+      .particle:nth-child(4) {
+        left: 40%;
+        animation-delay: 3s;
+        animation-duration: 9s;
+      }
+      .particle:nth-child(5) {
+        left: 50%;
+        animation-delay: 4s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(6) {
+        left: 60%;
+        animation-delay: 5s;
+        animation-duration: 8s;
+      }
+      .particle:nth-child(7) {
+        left: 70%;
+        animation-delay: 6s;
+        animation-duration: 7s;
+      }
+      .particle:nth-child(8) {
+        left: 80%;
+        animation-delay: 7s;
+        animation-duration: 9s;
+      }
+      .particle:nth-child(9) {
+        left: 90%;
+        animation-delay: 8s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(10) {
+        left: 95%;
+        animation-delay: 9s;
+        animation-duration: 8s;
+      }
+
+      /* Slide 2 - Tổng quan */
+      .overview-slide {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+      }
+
+      .overview-header {
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .overview-header h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .overview-content {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .overview-list {
+        list-style: none;
+        counter-reset: item;
+        max-width: 100%;
+      }
+
+      .overview-list li {
+        counter-increment: item;
+        background: white;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.1);
+        border-left: 5px solid #2196f3;
+        transition: all 0.3s ease;
+        position: relative;
+        margin-left: 20px;
+      }
+
+      .overview-list li:hover {
+        transform: translateX(10px);
+        box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2);
+      }
+
+      .overview-list li::before {
+        content: counter(item);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #2196f3;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+
+      .overview-list li h3 {
+        color: #1976d2;
+        margin-bottom: 8px;
+        font-size: 1.2rem;
+      }
+
+      .overview-list li p {
+        color: #666;
+        line-height: 1.5;
+      }
+
+      /* Slide 3+ - Nội dung chi tiết */
+      .content-slide {
+        background: #f8f9fa;
+      }
+
+      .content-header {
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 25px 40px;
+        text-align: center;
+        position: relative;
+        border-bottom: 3px solid #0d47a1;
+      }
+
+      .content-header::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 6px;
+        background: #ffeb3b;
+        border-radius: 3px;
+      }
+
+      .content-header h1 {
+        font-size: 2.2rem;
+        font-weight: 600;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .content-body {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+      }
+
+      .content-section {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 20px rgba(33, 150, 243, 0.08);
+        border: 1px solid rgba(33, 150, 243, 0.1);
+      }
+
+      .content-section h2 {
+        color: #1976d2;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e3f2fd;
+        padding-bottom: 10px;
+      }
+
+      .content-section h3 {
+        color: #1976d2;
+        font-size: 1.4rem;
+        margin: 20px 0 15px 0;
+      }
+
+      .content-section h4 {
+        color: #1976d2;
+        font-size: 1.2rem;
+        margin: 15px 0 10px 0;
+      }
+
+      .content-section p {
+        color: #444;
+        line-height: 1.8;
+        margin-bottom: 15px;
+        font-size: 1.05rem;
+      }
+
+      .content-section ul,
+      .content-section ol {
+        margin: 15px 0;
+        padding-left: 25px;
+      }
+
+      .content-section li {
+        color: #444;
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+
+      .code-block {
+        background: #263238;
+        color: #eceff1;
+        padding: 20px;
+        border-radius: 10px;
+        font-family: "Courier New", monospace;
+        font-size: 0.95rem;
+        margin: 20px 0;
+        overflow-x: auto;
+        border-left: 4px solid #ff5722;
+        position: relative;
+      }
+
+      .code-block::before {
+        content: "CODE";
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: #ff5722;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: 0.7rem;
+        font-weight: bold;
+      }
+
+      .code-block .comment {
+        color: #4caf50;
+      }
+
+      .code-block .tag {
+        color: #ff9800;
+      }
+
+      .code-block .attribute {
+        color: #2196f3;
+      }
+
+      .code-block .string {
+        color: #4caf50;
+      }
+
+      .image-placeholder {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border: 2px dashed #2196f3;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        color: #1976d2;
+        margin: 20px 0;
+        font-style: italic;
+      }
+
+      .highlight {
+        background: linear-gradient(120deg, #fff3e0 0%, #ffe0b2 100%);
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-weight: 600;
+        color: #e65100;
+      }
+
+      /* Navigation */
+      .navigation {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        z-index: 100;
+      }
+
+      .nav-btn {
+        background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+      }
+
+      .nav-btn:disabled {
+        background: #bdbdbd;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .slide-counter {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        z-index: 100;
+      }
+
+      /* Progress bar */
+      .progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #2196f3 0%, #21cbf3 100%);
+        transition: width 0.3s ease;
+        border-radius: 0 0 2px 0;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .slide-container {
+          height: 90vh;
+        }
+
+        .club-name {
+          font-size: 2rem;
+        }
+
+        .course-title {
+          font-size: 1.5rem;
+        }
+
+        .lesson-info {
+          font-size: 1.3rem;
+          padding: 15px 25px;
+        }
+
+        .content-body {
+          padding: 20px;
+        }
+
+        .slide-counter {
+          bottom: 15px;
+          right: 15px;
+          padding: 8px 15px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="progress-bar" id="progressBar"></div>
+      <!-- Slide 1: Tiêu đề chính -->
+      <div class="slide intro-slide active">
+        <div class="intro-content">
+          <h1 class="club-name">Phenikaa Techlearn Club</h1>
+          <h2 class="course-title">Khóa học HTML, CSS cơ bản</h2>
+          <div class="lesson-info">
+            <span>Buổi 1: Giới thiệu HTML & CSS</span>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2: Tóm tắt nội dung -->
+      <div class="slide overview-slide">
+        <div class="overview-header">
+          <h1>Tóm tắt nội dung</h1>
+        </div>
+        <div class="overview-content">
+          <ul class="overview-list">
+            <li><h3>Mục tiêu học tập</h3></li>
+            <li><h3>Nội quy lớp học</h3></li>
+            <li><h3>Các khái niệm cơ bản</h3></li>
+            <li><h3>Cài đặt công cụ lập trình</h3></li>
+            <li><h3>Học HTML</h3></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Slide 3: Mục tiêu học tập -->
+      <div class="slide content-slide">
+        <div class="content-header"><h1>Mục tiêu học tập</h1></div>
+        <div class="content-body">
+          <div class="content-section">
+            <p>Sau buổi học này, bạn sẽ:</p>
+            <ul>
+              <li>Hiểu được cách hoạt động của một trang web hiện đại</li>
+              <li>Nắm vững các khái niệm cơ bản về HTML và CSS</li>
+              <li>Có thể tự tay dựng layout web đơn giản</li>
+              <li>Đạt 10 điểm giữa kỳ môn "Xây dựng ứng dụng web"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 4: Nội quy lớp học -->
+      <div class="slide content-slide">
+        <div class="content-header"><h1>Nội quy lớp học</h1></div>
+        <div class="content-body">
+          <div class="content-section">
+            <ul>
+              <li>
+                <b>Chuyên cần</b>: Không được nghỉ quá 2 buổi (80% số buổi học)
+              </li>
+              <li><b>Camera</b>: Bật camera trong suốt buổi học</li>
+              <li><b>Bài tập</b>: Hoàn thành đầy đủ các bài tập được giao</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 5: Các khái niệm cơ bản -->
+      <div class="slide content-slide">
+        <div class="content-header"><h1>Các khái niệm cơ bản</h1></div>
+        <div class="content-body">
+          <div class="content-section">
+            <h3>Frontend</h3>
+            <p>
+              Là phần "mặt tiền" mà người dùng nhìn thấy và tương tác trực tiếp.
+              Bao gồm giao diện, màu sắc, nút bấm, form nhập liệu, menu... Tất
+              cả những gì bạn click chuột hay gõ phím đều thuộc về frontend.
+            </p>
+            <h3>Backend</h3>
+            <p>
+              Là phần "hậu trường" chạy ngầm mà người dùng không nhìn thấy. Xử
+              lý logic, quản lý cơ sở dữ liệu, xác thực người dùng... Ví dụ: khi
+              bạn đăng nhập Facebook, frontend hiển thị form đăng nhập, còn
+              backend kiểm tra tài khoản có đúng không.
+            </p>
+            <h3>Fullstack</h3>
+            <p>
+              Developer biết làm cả frontend lẫn backend. Nói cách khác là "biết
+              làm từ A đến Z" một trang web hoàn chỉnh.
+            </p>
+            <h3>HTML</h3>
+            <p>
+              <b>HyperText Markup Language</b> - Ngôn ngữ đánh dấu tạo cấu trúc
+              trang web. HTML giống như bộ xương của trang web, quy định đâu là
+              tiêu đề, đâu là đoạn văn, đâu là hình ảnh...
+            </p>
+            <h3>CSS</h3>
+            <p>
+              <b>Cascading Style Sheets</b> - Ngôn ngữ trang trí, làm đẹp cho
+              trang web. Nếu HTML là bộ xương thì CSS là "trang phục", quy định
+              màu sắc, font chữ, kích thước, vị trí các phần tử.
+            </p>
+            <h3>UI (User Interface)</h3>
+            <p>
+              Giao diện người dùng - tất cả những gì người dùng nhìn thấy trên
+              màn hình như button, menu, form, hình ảnh...
+            </p>
+            <h3>UX (User Experience)</h3>
+            <p>
+              Trải nghiệm người dùng - tập trung vào cảm giác khi sử dụng trang
+              web. Website có dễ dùng không? Tìm thông tin có nhanh chóng không?
+              Có cảm thấy thoải mái không?
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 6: Cài đặt công cụ lập trình -->
+      <div class="slide content-slide">
+        <div class="content-header"><h1>Cài đặt công cụ lập trình</h1></div>
+        <div class="content-body">
+          <div class="content-section">
+            <h3>Phần mềm chính</h3>
+            <p>
+              <b>Visual Studio Code</b> - Trình soạn thảo code miễn phí, nhẹ và
+              phổ biến nhất cho phát triển web.<br />📥 Tải về tại:
+              <a href="https://code.visualstudio.com/download" target="_blank"
+                >https://code.visualstudio.com/download</a
+              >
+            </p>
+            <h3>Các tiện ích mở rộng cần thiết</h3>
+            <ul>
+              <li>
+                <b>Auto Rename Tag</b> - Đổi tên thẻ mở thì thẻ đóng tự động đổi
+                theo
+              </li>
+              <li><b>Beautify</b> - Sắp xếp code gọn gàng, dễ đọc</li>
+              <li><b>Color Highlight</b> - Hiển thị màu sắc ngay trong code</li>
+              <li><b>CSS Variables Autocomplete</b> - Gợi ý tên biến CSS</li>
+              <li>
+                <b>HTML Boilerplate</b> - Tạo khung HTML cơ bản nhanh chóng
+              </li>
+              <li><b>HTML Snippets</b> - Gợi ý code HTML khi gõ</li>
+              <li>
+                <b>Live Server</b> - Tự động làm mới trang web khi lưu code
+              </li>
+              <li><b>Material Icon Theme</b> - Icon đẹp cho các file</li>
+              <li><b>Path Intellisense</b> - Gợi ý đường dẫn file</li>
+            </ul>
+            <p>
+              <b>Cách cài extension</b>: Mở VS Code → Click biểu tượng
+              Extensions ở thanh bên trái → Tìm tên extension → Click Install.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 7: Học HTML -->
+      <div class="slide content-slide">
+        <div class="content-header"><h1>Học HTML</h1></div>
+        <div class="content-body">
+          <div class="content-section">
+            <h3>Khái niệm cơ bản về HTML</h3>
+            <ul>
+              <li><b>HTML</b> viết tắt của <b>HyperText Markup Language</b></li>
+              <li>Là ngôn ngữ đánh dấu siêu văn bản</li>
+              <li><b>Không phải</b> là ngôn ngữ lập trình</li>
+              <li>Có tác dụng tạo bố cục và định dạng trang web</li>
+            </ul>
+            <h3>Cấu trúc file HTML cơ bản</h3>
+            <div class="code-block">
+              <span class="tag">&lt;!DOCTYPE html&gt;</span><br />
+              <span class="tag">&lt;html&gt;</span><br />
+              <span class="tag">&lt;head&gt;</span><br />
+              &nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Tiêu đề trên
+              tab<span class="tag">&lt;/title&gt;</span><br />
+              <span class="tag">&lt;/head&gt;</span><br />
+              <span class="tag">&lt;body&gt;</span><br />
+              &nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Tiêu đề chính<span
+                class="tag"
+                >&lt;/h1&gt;</span
+              ><br />
+              &nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Đoạn văn bản...<span
+                class="tag"
+                >&lt;/p&gt;</span
+              ><br />
+              <span class="tag">&lt;/body&gt;</span><br />
+              <span class="tag">&lt;/html&gt;</span>
+            </div>
+            <h3>Ý nghĩa các thẻ HTML cơ bản</h3>
+            <h4>Thẻ khai báo và cấu trúc chính</h4>
+            <ul>
+              <li>
+                <b>&lt;!DOCTYPE html&gt;</b>: Khai báo kiểu tài liệu - cho trình
+                duyệt biết đây là tài liệu HTML
+              </li>
+              <li>
+                <b>&lt;html&gt;&lt;/html&gt;</b>: Thẻ bắt buộc, element cấp cao
+                nhất, bao bọc toàn bộ nội dung trang HTML
+              </li>
+              <li>
+                <b>&lt;head&gt;&lt;/head&gt;</b>: Chứa các thông tin meta của
+                trang web như tiêu đề, charset, không hiển thị trên trang
+              </li>
+              <li>
+                <b>&lt;title&gt;&lt;/title&gt;</b>: Nằm bên trong thẻ
+                <code>&lt;head&gt;</code>, dùng để khai báo tiêu đề của trang
+                (hiển thị trên tab trình duyệt)
+              </li>
+              <li>
+                <b>&lt;body&gt;&lt;/body&gt;</b>: Chứa tất cả các nội dung sẽ
+                hiển thị trên trang web
+              </li>
+            </ul>
+            <h4>Thẻ nội dung cơ bản</h4>
+            <ul>
+              <li>
+                <b>&lt;h1&gt;&lt;/h1&gt;</b>: Phần tử xác định một tiêu đề lớn
+                (heading 1)
+              </li>
+              <li>
+                <b>&lt;p&gt;&lt;/p&gt;</b>: Phần tử xác định một đoạn văn bản
+                (paragraph)
+              </li>
+            </ul>
+            <h3>Hướng dẫn sử dụng Dev Tools</h3>
+            <p><i>(Sẽ được hướng dẫn trực tiếp khi học)</i></p>
+            <h3>Các thẻ Meta quan trọng</h3>
+            <p>
+              Thẻ <code>&lt;meta&gt;</code> cung cấp thông tin metadata về trang
+              web, đặt trong thẻ <code>&lt;head&gt;</code>:
+            </p>
+            <div class="code-block">
+              <span class="tag">&lt;meta</span>
+              <span class="attribute">charset</span>=<span class="string"
+                >"UTF-8"</span
+              >
+              <span class="tag">/&gt;</span>
+            </div>
+            <ul>
+              <li>Xác định bộ ký tự UTF-8 để hỗ trợ hiển thị tiếng Việt</li>
+            </ul>
+            <div class="code-block">
+              <span class="tag">&lt;meta</span>
+              <span class="attribute">name</span>=<span class="string"
+                >"keywords"</span
+              >
+              <span class="attribute">content</span>=<span class="string"
+                >"HTML, CSS, JavaScript"</span
+              >
+              <span class="tag">/&gt;</span>
+            </div>
+            <ul>
+              <li>Xác định từ khóa cho công cụ tìm kiếm</li>
+            </ul>
+            <div class="code-block">
+              <span class="tag">&lt;meta</span>
+              <span class="attribute">name</span>=<span class="string"
+                >"description"</span
+              >
+              <span class="attribute">content</span>=<span class="string"
+                >"Free Web tutorials"</span
+              >
+              <span class="tag">/&gt;</span>
+            </div>
+            <ul>
+              <li>Xác định mô tả về trang web (hiển thị trên Google)</li>
+            </ul>
+            <div class="code-block">
+              <span class="tag">&lt;meta</span>
+              <span class="attribute">name</span>=<span class="string"
+                >"author"</span
+              >
+              <span class="attribute">content</span>=<span class="string"
+                >"John Doe"</span
+              >
+              <span class="tag">/&gt;</span>
+            </div>
+            <ul>
+              <li>Xác định tác giả của trang</li>
+            </ul>
+            <div class="code-block">
+              <span class="tag">&lt;meta</span>
+              <span class="attribute">name</span>=<span class="string"
+                >"viewport"</span
+              >
+              <span class="attribute">content</span>=<span class="string"
+                >"width=device-width, initial-scale=1.0"</span
+              >
+              <span class="tag">/&gt;</span>
+            </div>
+            <ul>
+              <li>
+                Đặt chế độ xem để trang web hiển thị tốt trên tất cả thiết bị
+                (responsive)
+              </li>
+            </ul>
+            <h3>Comments, Elements, Attributes</h3>
+            <h4>Comments (Chú thích)</h4>
+            <ul>
+              <li>
+                Là các chú thích để dễ nhớ và hiểu code, không hiển thị lên giao
+                diện
+              </li>
+              <li>
+                <b>Cú pháp</b>: <code>&lt;!-- Nội dung comment --&gt;</code>
+              </li>
+              <li><b>Phím tắt</b>: Ctrl + / (Windows) hoặc Cmd + / (Mac)</li>
+            </ul>
+            <h4>Elements (Phần tử)</h4>
+            <ul>
+              <li>Được xác định bởi: thẻ bắt đầu + nội dung + thẻ kết thúc</li>
+              <li>
+                <b>Cú pháp</b>:
+                <code>&lt;tagname&gt;Nội dung...&lt;/tagname&gt;</code>
+              </li>
+              <li>
+                <b>Ví dụ</b>: <code>&lt;h1&gt;Tiêu đề lớn&lt;/h1&gt;</code>
+              </li>
+              <li>Tên thẻ không phân biệt hoa thường, nhưng nên viết thường</li>
+            </ul>
+            <h4>Attributes (Thuộc tính)</h4>
+            <ul>
+              <li>Cung cấp thêm thông tin cho elements, nằm trong thẻ mở</li>
+              <li>Một element có thể có nhiều thuộc tính</li>
+              <li>
+                <b>Cú pháp</b>:
+                <code
+                  >&lt;tagname attribute-name="value"&gt;Nội
+                  dung...&lt;/tagname&gt;</code
+                >
+              </li>
+              <li>
+                <b>Ví dụ</b>: <code>&lt;html lang="vi"&gt;&lt;/html&gt;</code>
+              </li>
+            </ul>
+            <h3>Headings, Paragraphs, Formatting</h3>
+            <h4>Headings (Tiêu đề)</h4>
+            <p>Có 6 thẻ heading từ quan trọng nhất đến ít quan trọng nhất:</p>
+            <ul>
+              <li>
+                <b>&lt;h1&gt;&lt;/h1&gt;</b>: Tiêu đề quan trọng nhất, mỗi trang
+                chỉ nên có 1 thẻ h1 (chuẩn SEO)
+              </li>
+              <li><b>&lt;h2&gt;&lt;/h2&gt;</b>: Tiêu đề phụ cấp 2</li>
+              <li><b>&lt;h3&gt;&lt;/h3&gt;</b>: Tiêu đề phụ cấp 3</li>
+              <li><b>&lt;h4&gt;&lt;/h4&gt;</b>: Tiêu đề phụ cấp 4</li>
+              <li><b>&lt;h5&gt;&lt;/h5&gt;</b>: Tiêu đề phụ cấp 5</li>
+              <li><b>&lt;h6&gt;&lt;/h6&gt;</b>: Tiêu đề ít quan trọng nhất</li>
+            </ul>
+            <h4>Paragraphs (Đoạn văn)</h4>
+            <ul>
+              <li>
+                <b>&lt;p&gt;Nội dung…&lt;/p&gt;</b>: Tạo đoạn văn, luôn bắt đầu
+                trên dòng mới
+              </li>
+              <li>
+                <b>&lt;hr&gt;</b>: Tạo đường kẻ ngang ngăn cách chủ đề (thẻ
+                trống)
+              </li>
+              <li>
+                <b>&lt;br&gt;</b>: Ngắt dòng trong đoạn văn bản (thẻ trống)
+              </li>
+            </ul>
+            <h4>Formatting (Định dạng văn bản)</h4>
+            <p><b>Làm đậm văn bản:</b></p>
+            <ul>
+              <li><b>&lt;b&gt;&lt;/b&gt;</b>: Văn bản in đậm (chỉ hiển thị)</li>
+              <li>
+                <b>&lt;strong&gt;&lt;/strong&gt;</b>: Văn bản in đậm và quan
+                trọng (có ý nghĩa)
+              </li>
+            </ul>
+            <p><b>Làm nghiêng văn bản:</b></p>
+            <ul>
+              <li>
+                <b>&lt;i&gt;&lt;/i&gt;</b>: Văn bản in nghiêng (chỉ hiển thị)
+              </li>
+              <li>
+                <b>&lt;em&gt;&lt;/em&gt;</b>: Văn bản in nghiêng và nhấn mạnh
+                (có ý nghĩa)
+              </li>
+            </ul>
+            <p><b>Các định dạng khác:</b></p>
+            <ul>
+              <li><b>&lt;small&gt;&lt;/small&gt;</b>: Văn bản chữ nhỏ hơn</li>
+              <li>
+                <b>&lt;sub&gt;&lt;/sub&gt;</b>: Văn bản có chỉ số dưới (H₂O)
+              </li>
+              <li>
+                <b>&lt;sup&gt;&lt;/sup&gt;</b>: Văn bản có chỉ số trên (x²)
+              </li>
+              <li>
+                <b>&lt;ins&gt;&lt;/ins&gt;</b>: Văn bản được chèn (gạch chân)
+              </li>
+              <li>
+                <b>&lt;del&gt;&lt;/del&gt;</b>: Văn bản đã xóa (gạch ngang)
+              </li>
+              <li>
+                <b>&lt;mark&gt;&lt;/mark&gt;</b>: Văn bản được đánh dấu
+                (highlight)
+              </li>
+            </ul>
+            <h3>Lưu ý quan trọng</h3>
+            <ul>
+              <li>
+                File HTML phải có phần mở rộng <code>.html</code> hoặc
+                <code>.htm</code>
+              </li>
+              <li>
+                Thẻ <code>&lt;head&gt;</code> chứa thông tin cho trình duyệt,
+                không hiển thị cho người dùng
+              </li>
+              <li>
+                Thẻ <code>&lt;body&gt;</code> chứa nội dung hiển thị trên trang
+                web
+              </li>
+              <li>
+                Mỗi trang HTML chỉ nên có một thẻ <code>&lt;h1&gt;</code> để
+                chuẩn SEO
+              </li>
+              <li>
+                Nên dùng <code>&lt;strong&gt;</code> thay vì
+                <code>&lt;b&gt;</code>, <code>&lt;em&gt;</code> thay vì
+                <code>&lt;i&gt;</code> vì có ý nghĩa ngữ nghĩa
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">
+      <span id="currentSlide">1</span> / <span id="totalSlides">7</span>
+    </div>
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">
+        ← Trước
+      </button>
+      <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+        Tiếp →
+      </button>
+    </div>
+    <script>
+      let currentSlideIndex = 0;
+      const slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+
+      function updateSlideDisplay() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove("active");
+          if (index === currentSlideIndex) {
+            slide.classList.add("active");
+          }
+        });
+
+        // Update counter
+        document.getElementById("currentSlide").textContent =
+          currentSlideIndex + 1;
+        document.getElementById("totalSlides").textContent = totalSlides;
+
+        // Update progress bar
+        const progressBar = document.getElementById("progressBar");
+        const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
+        progressBar.style.width = progress + "%";
+
+        // Update navigation buttons
+        document.getElementById("prevBtn").disabled = currentSlideIndex === 0;
+        document.getElementById("nextBtn").disabled =
+          currentSlideIndex === totalSlides - 1;
+      }
+
+      function changeSlide(direction) {
+        const newIndex = currentSlideIndex + direction;
+        if (newIndex >= 0 && newIndex < totalSlides) {
+          currentSlideIndex = newIndex;
+          updateSlideDisplay();
+        }
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") changeSlide(-1);
+        if (e.key === "ArrowRight") changeSlide(1);
+        if (e.key === "Home") {
+          currentSlideIndex = 0;
+          updateSlideDisplay();
+        }
+        if (e.key === "End") {
+          currentSlideIndex = totalSlides - 1;
+          updateSlideDisplay();
+        }
+      });
+
+      // Initialize
+      updateSlideDisplay();
+
+      // Auto-save slide position
+      function saveSlidePosition() {
+        // In a real application, you might want to save to localStorage
+        // localStorage.setItem('currentSlide', currentSlideIndex);
+      }
+
+      // Function to easily add new slides
+      function addSlide(title, content) {
+        const slideHTML = `
+                <div class="slide content-slide">
+                    <div class="content-header">
+                        <h1>${title}</h1>
+                    </div>
+                    <div class="content-body">
+                        <div class="content-section">
+                            ${content}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        const slideContainer = document.querySelector(".slide-container");
+        const slideCounter = document.querySelector(".slide-counter");
+        slideCounter.insertAdjacentHTML("beforebegin", slideHTML);
+
+        // Update slides array
+        slides = document.querySelectorAll(".slide");
+        updateSlideDisplay();
+      }
+    </script>
+  </body>
+</html>
