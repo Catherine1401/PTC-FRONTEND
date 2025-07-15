@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buổi 3: Học HTML, HTML5 (tiếp)</title>
+    <style>
+      /* Giữ nguyên toàn bộ CSS từ buoi-2.html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #e3f2fd 0%,
+          #bbdefb 50%,
+          #90caf9 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(33, 150, 243, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(13, 71, 161, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+      .slide-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(33, 150, 243, 0.2);
+        width: 100%;
+        max-width: 1000px;
+        height: 700px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid rgba(33, 150, 243, 0.1);
+      }
+      .slide {
+        display: none;
+        height: 100%;
+        animation: slideIn 0.5s ease-in-out;
+      }
+      .slide.active {
+        display: flex;
+        flex-direction: column;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .intro-slide {
+        background: linear-gradient(45deg, #0d47a1, #1976d2, #42a5f5, #64b5f6);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .intro-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 60%,
+            rgba(255, 255, 255, 0.08) 0%,
+            transparent 50%
+          );
+        animation: floatingOrbs 12s ease-in-out infinite;
+      }
+      @keyframes floatingOrbs {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        33% {
+          transform: translateY(-20px) rotate(120deg);
+        }
+        66% {
+          transform: translateY(10px) rotate(240deg);
+        }
+      }
+      .intro-slide::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%
+        );
+        animation: shimmer 3s ease-in-out infinite;
+        transform: translateX(-100%);
+      }
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      .intro-content {
+        z-index: 10;
+        position: relative;
+        animation: contentFloat 6s ease-in-out infinite;
+      }
+      @keyframes contentFloat {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .club-name {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+          0 0 40px rgba(33, 150, 243, 0.8);
+        background: linear-gradient(45deg, #fff, #e3f2fd, #fff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: textGlow 4s ease-in-out infinite;
+        position: relative;
+      }
+      @keyframes textGlow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+          filter: brightness(1);
+        }
+        50% {
+          background-position: 100% 50%;
+          filter: brightness(1.2);
+        }
+      }
+      .club-name::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: sparkle 2s linear infinite;
+        z-index: -1;
+      }
+      @keyframes sparkle {
+        0% {
+          transform: translateX(-100%) rotate(30deg);
+        }
+        100% {
+          transform: translateX(100%) rotate(30deg);
+        }
+      }
+      .course-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #e3f2fd;
+        text-shadow: 0 0 15px rgba(227, 242, 253, 0.8);
+        animation: titlePulse 3s ease-in-out infinite;
+      }
+      @keyframes titlePulse {
+        0%,
+        100% {
+          transform: scale(1);
+          text-shadow: 0 0 15px rgba(227, 242, 253, 0.8);
+        }
+        50% {
+          transform: scale(1.05);
+          text-shadow: 0 0 25px rgba(227, 242, 253, 1);
+        }
+      }
+      .lesson-info {
+        font-size: 1.8rem;
+        font-weight: 500;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.1)
+        );
+        padding: 25px 50px;
+        border-radius: 25px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        animation: cardFloat 4s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+      @keyframes cardFloat {
+        0%,
+        100% {
+          transform: translateY(0px) rotateX(0deg);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        50% {
+          transform: translateY(-8px) rotateX(2deg);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+        }
+      }
+      .lesson-info::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        animation: lessonShine 3s ease-in-out infinite;
+      }
+      @keyframes lessonShine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: particleFloat 8s linear infinite;
+      }
+      @keyframes particleFloat {
+        0% {
+          transform: translateY(100vh) translateX(0px);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) translateX(100px);
+          opacity: 0;
+        }
+      }
+      .particle:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(2) {
+        left: 20%;
+        animation-delay: 1s;
+        animation-duration: 8s;
+      }
+      .particle:nth-child(3) {
+        left: 30%;
+        animation-delay: 2s;
+        animation-duration: 7s;
+      }
+      .particle:nth-child(4) {
+        left: 40%;
+        animation-delay: 3s;
+        animation-duration: 9s;
+      }
+      .particle:nth-child(5) {
+        left: 50%;
+        animation-delay: 4s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(6) {
+        left: 60%;
+        animation-delay: 5s;
+        animation-duration: 8s;
+      }
+      .particle:nth-child(7) {
+        left: 70%;
+        animation-delay: 6s;
+        animation-duration: 7s;
+      }
+      .particle:nth-child(8) {
+        left: 80%;
+        animation-delay: 7s;
+        animation-duration: 9s;
+      }
+      .particle:nth-child(9) {
+        left: 90%;
+        animation-delay: 8s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(10) {
+        left: 95%;
+        animation-delay: 9s;
+        animation-duration: 8s;
+      }
+      .overview-slide {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+      }
+      .overview-header {
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+      }
+      .overview-header h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .overview-content {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+      .overview-list {
+        list-style: none;
+        counter-reset: item;
+        max-width: 100%;
+      }
+      .overview-list li {
+        counter-increment: item;
+        background: white;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.1);
+        border-left: 5px solid #2196f3;
+        transition: all 0.3s ease;
+        position: relative;
+        margin-left: 20px;
+      }
+      .overview-list li:hover {
+        transform: translateX(10px);
+        box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2);
+      }
+      .overview-list li::before {
+        content: counter(item);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #2196f3;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+      .overview-list li h3 {
+        color: #1976d2;
+        margin-bottom: 8px;
+        font-size: 1.2rem;
+      }
+      .overview-list li p {
+        color: #666;
+        line-height: 1.5;
+      }
+      .content-slide {
+        background: #f8f9fa;
+      }
+      .content-header {
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 25px 40px;
+        text-align: center;
+        position: relative;
+        border-bottom: 3px solid #0d47a1;
+      }
+      .content-header::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 6px;
+        background: #ffeb3b;
+        border-radius: 3px;
+      }
+      .content-header h1 {
+        font-size: 2.2rem;
+        font-weight: 600;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .content-body {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+      }
+      .content-section {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 20px rgba(33, 150, 243, 0.08);
+        border: 1px solid rgba(33, 150, 243, 0.1);
+      }
+      .content-section h2 {
+        color: #1976d2;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e3f2fd;
+        padding-bottom: 10px;
+      }
+      .content-section h3 {
+        color: #1976d2;
+        font-size: 1.4rem;
+        margin: 20px 0 15px 0;
+      }
+      .content-section h4 {
+        color: #1976d2;
+        font-size: 1.2rem;
+        margin: 15px 0 10px 0;
+      }
+      .content-section p {
+        color: #444;
+        line-height: 1.8;
+        margin-bottom: 15px;
+        font-size: 1.05rem;
+      }
+      .content-section ul,
+      .content-section ol {
+        margin: 15px 0;
+        padding-left: 25px;
+      }
+      .content-section li {
+        color: #444;
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+      /* Code block style: giữ nguyên, áp dụng cho pre.code-block */
+      pre.code-block {
+        background: #263238;
+        color: #eceff1;
+        padding: 24px 32px 24px 40px;
+        border-radius: 12px;
+        font-family: "Fira Mono", "Courier New", monospace;
+        font-size: 1rem;
+        margin: 28px 0;
+        overflow-x: auto;
+        border-left: 6px solid #ff5722;
+        position: relative;
+        box-shadow: 0 2px 12px rgba(33, 150, 243, 0.07);
+        tab-size: 2;
+        white-space: pre;
+      }
+      pre.code-block::before {
+        content: "CODE";
+        position: absolute;
+        top: 8px;
+        right: 18px;
+        background: #ff5722;
+        color: white;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        opacity: 0.85;
+      }
+      .code-block span.tag,
+      .code-block span.attribute,
+      .code-block span.string,
+      .code-block span.comment {
+        display: inline-block;
+        padding-left: 18px;
+        text-indent: 0;
+      }
+      .code-block span.tag {
+        color: #ff9800;
+      }
+      .code-block span.attribute {
+        color: #2196f3;
+      }
+      .code-block span.string {
+        color: #4caf50;
+      }
+      .code-block span.comment {
+        color: #4caf50;
+        font-style: italic;
+      }
+      .code-block br {
+        line-height: 2.1;
+      }
+      .code-block span:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+      .image-placeholder {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border: 2px dashed #2196f3;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        color: #1976d2;
+        margin: 20px 0;
+        font-style: italic;
+      }
+      .highlight {
+        background: linear-gradient(120deg, #fff3e0 0%, #ffe0b2 100%);
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-weight: 600;
+        color: #e65100;
+      }
+      .navigation {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        z-index: 100;
+      }
+      .nav-btn {
+        background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+      }
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+      }
+      .nav-btn:disabled {
+        background: #bdbdbd;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+      .slide-counter {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        z-index: 100;
+      }
+      .progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #2196f3 0%, #21cbf3 100%);
+        transition: width 0.3s ease;
+        border-radius: 0 0 2px 0;
+      }
+      /* Table styling for slides */
+      .content-section table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(33, 150, 243, 0.07);
+        margin: 20px 0;
+      }
+      .content-section th,
+      .content-section td {
+        padding: 14px 18px;
+        border-bottom: 1px solid #e3f2fd;
+        text-align: left;
+      }
+      .content-section th {
+        background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+        color: #fff;
+        font-weight: 600;
+        border-bottom: 2px solid #1976d2;
+      }
+      .content-section tr:last-child td {
+        border-bottom: none;
+      }
+      .content-section tbody tr:hover {
+        background: #e3f2fd;
+        transition: background 0.2s;
+      }
+      pre.code-block code {
+        color: #eceff1;
+        font-family: "Fira Mono", "Courier New", monospace;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      /* Highlight tag, attribute, string, comment */
+      pre.code-block code .hl-tag {
+        color: #ff9800;
+      }
+      pre.code-block code .hl-attr {
+        color: #42a5f5;
+      }
+      pre.code-block code .hl-string {
+        color: #4caf50;
+      }
+      pre.code-block code .hl-comment {
+        color: #b0bec5;
+        font-style: italic;
+      }
+      @media (max-width: 768px) {
+        .slide-container {
+          height: 90vh;
+        }
+        .club-name {
+          font-size: 2rem;
+        }
+        .course-title {
+          font-size: 1.5rem;
+        }
+        .lesson-info {
+          font-size: 1.3rem;
+          padding: 15px 25px;
+        }
+        .content-body {
+          padding: 20px;
+        }
+        .slide-counter {
+          bottom: 15px;
+          right: 15px;
+          padding: 8px 15px;
+          font-size: 0.9rem;
+        }
+        .content-section table,
+        .content-section thead,
+        .content-section tbody,
+        .content-section th,
+        .content-section td,
+        .content-section tr {
+          display: block;
+        }
+        .content-section th,
+        .content-section td {
+          padding: 10px 8px;
+        }
+        .content-section th {
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="progress-bar" id="progressBar"></div>
+      <!-- Slide 1: Giới thiệu -->
+      <div class="slide intro-slide active">
+        <div class="intro-content">
+          <h1 class="club-name">Phenikaa Techlearn Club</h1>
+          <h2 class="course-title">Khóa học HTML, CSS cơ bản</h2>
+          <div class="lesson-info">
+            <span>Buổi 3: Học HTML, HTML5 (tiếp)</span>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2: Tóm tắt nội dung -->
+      <div class="slide overview-slide">
+        <div class="overview-header">
+          <h1>Tóm tắt nội dung</h1>
+        </div>
+        <div class="overview-content">
+          <ul class="overview-list">
+            <li><h3>Nhúng Iframe</h3></li>
+            <li><h3>Một số thẻ Semantic</h3></li>
+            <li>
+              <h3>
+                Forms (Form Attributes, Form Elements, Input Types, Input
+                Attributes)
+              </h3>
+            </li>
+            <li><h3>Những tính năng HTML5 có mà HTML không có</h3></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Slide 3+: Nội dung từng mục lớn -->
+      <!-- Các slide nội dung được chuyển từ Markdown BUOI-3.md -->
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>1. Nhúng Iframe</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <h2>Khái niệm</h2>
+            <p>
+              Thẻ <code>&lt;iframe&gt;&lt;/iframe&gt;</code> được sử dụng để
+              hiển thị một trang web trong một trang web.
+            </p>
+            <h2>Cú pháp</h2>
+            <pre
+              class="code-block"
+            ><code><span class="hl-tag">&lt;iframe</span> <span class="hl-attr">src</span>=<span class="hl-string">"url"</span> <span class="hl-attr">title</span>=<span class="hl-string">"description"</span> <span class="hl-attr">height</span>=<span class="hl-string">"200"</span> <span class="hl-attr">width</span>=<span class="hl-string">"300"</span><span class="hl-tag">&gt;&lt;/iframe&gt;</span></code></pre>
+            <h2>Ví dụ</h2>
+            <pre
+              class="code-block"
+            ><code><span class="hl-tag">&lt;iframe</span> <span class="hl-attr">src</span>=<span class="hl-string">"https://daca.vn/"</span> <span class="hl-attr">title</span>=<span class="hl-string">"Website Daca"</span> <span class="hl-attr">width</span>=<span class="hl-string">"1200"</span> <span class="hl-attr">height</span>=<span class="hl-string">"600"</span><span class="hl-tag">&gt;&lt;/iframe&gt;</span>
+<span class="hl-tag">&lt;iframe</span> <span class="hl-attr">src</span>=<span class="hl-string">"https://khoahoc.28tech.com.vn/"</span> <span class="hl-attr">title</span>=<span class="hl-string">"Website 28Tech"</span> <span class="hl-attr">width</span>=<span class="hl-string">"1200"</span> <span class="hl-attr">height</span>=<span class="hl-string">"600"</span><span class="hl-tag">&gt;&lt;/iframe&gt;</span></code></pre>
+            <h2>Mục tiêu cho một liên kết</h2>
+            <pre
+              class="code-block"
+            ><code><span class="hl-tag">&lt;iframe</span> <span class="hl-attr">src</span>=<span class="hl-string">"https://www.bing.com/"</span> <span class="hl-attr">name</span>=<span class="hl-string">"web_bing"</span> <span class="hl-attr">width</span>=<span class="hl-string">"1000"</span> <span class="hl-attr">height</span>=<span class="hl-string">"600"</span><span class="hl-tag">&gt;&lt;/iframe&gt;</span>
+<span class="hl-tag">&lt;p&gt;</span>
+  <span class="hl-tag">&lt;a</span> <span class="hl-attr">href</span>=<span class="hl-string">"https://coccoc.com/search"</span> <span class="hl-attr">target</span>=<span class="hl-string">"web_bing"</span><span class="hl-tag">&gt;</span>Tìm kiếm trên Cốc Cốc<span class="hl-tag">&lt;/a&gt;</span>
+<span class="hl-tag">&lt;/p&gt;</span></code></pre>
+            <p>
+              <b>Lưu ý:</b> Một số trang như google.com không cho phép nhúng
+              iframe, nên sẽ thấy thông báo từ chối kết nối, chỉ những trang nào
+              cho phép nhúng vào thì ta mới nhúng được.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>2. Một số thẻ Semantic</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <h2>Khái niệm</h2>
+            <p>
+              <b>Semantic:</b> Dịch ra là ngữ nghĩa. Là những thẻ có nội dung
+              bên trong có ý nghĩa tương ứng với tên thẻ đó.
+            </p>
+            <h2>Danh sách các thẻ Semantic</h2>
+            <div style="text-align: center; margin: 24px 0">
+              <img
+                src="../assets/images/image.png"
+                alt="HTML4 vs HTML5 Page Structure"
+                style="
+                  max-width: 100%;
+                  height: auto;
+                  border-radius: 12px;
+                  box-shadow: 0 2px 12px rgba(33, 150, 243, 0.12);
+                "
+              />
+              <div style="font-size: 1rem; color: #1976d2; margin-top: 8px">
+                So sánh cấu trúc trang HTML4 và HTML5
+              </div>
+            </div>
+            <ul>
+              <li>
+                <code>&lt;article&gt;</code>: Xác định nội dung độc lập, khép
+                kín
+              </li>
+              <li>
+                <code>&lt;aside&gt;</code>: Xác định nội dung ngoài nội dung
+                trang
+              </li>
+              <li>
+                <code>&lt;details&gt;</code>: Xác định các chi tiết bổ sung mà
+                người dùng có thể xem hoặc ẩn
+              </li>
+              <li>
+                <code>&lt;summary&gt;</code>: Xác định tiêu đề hiển thị cho phần
+                tử <code>&lt;details&gt;</code>
+              </li>
+              <li>
+                <code>&lt;figcaption&gt;</code>: Xác định chú thích cho phần tử
+                <code>&lt;figure&gt;</code>
+              </li>
+              <li>
+                <code>&lt;figure&gt;</code>: Chỉ định nội dung độc lập, như hình
+                minh họa, sơ đồ, ảnh, danh sách mã, v.v.
+              </li>
+              <li>
+                <code>&lt;header&gt;</code>: Chỉ định tiêu đề cho một tài liệu
+                hoặc section
+              </li>
+              <li>
+                <code>&lt;footer&gt;</code>: Xác định chân trang cho tài liệu
+                hoặc section
+              </li>
+              <li>
+                <code>&lt;main&gt;</code>: Chỉ định nội dung chính của một tài
+                liệu
+              </li>
+              <li>
+                <code>&lt;mark&gt;</code>: Xác định văn bản được đánh dấu / nhấn
+                mạnh
+              </li>
+              <li>
+                <code>&lt;nav&gt;</code> (navigation - dẫn đường): Xác định các
+                liên kết điều hướng
+              </li>
+              <li>
+                <code>&lt;section&gt;</code>: Xác định một phần trong tài liệu
+              </li>
+              <li><code>&lt;time&gt;</code>: Xác định ngày / giờ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>3. Forms</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <h2>3.1. Form là gì?</h2>
+            <p>
+              Là một biểu mẫu HTML được sử dụng để thu thập thông tin đầu vào
+              của người dùng. Đầu vào của người dùng thường được gửi đến máy chủ
+              để xử lý.
+            </p>
+            <h3>Ví dụ:</h3>
+            <pre
+              class="code-block"
+            ><code><span class="hl-tag">&lt;form</span> <span class="hl-attr">action</span>=<span class="hl-string">""</span><span class="hl-tag">&gt;</span>
+  <span class="hl-tag">&lt;label</span> <span class="hl-attr">for</span>=<span class="hl-string">"fullName"</span><span class="hl-tag">&gt;</span>Họ tên:<span class="hl-tag">&lt;/label&gt;</span>
+  <span class="hl-tag">&lt;br /&gt;</span>
+  <span class="hl-tag">&lt;input</span> <span class="hl-attr">type</span>=<span class="hl-string">"text"</span> <span class="hl-attr">id</span>=<span class="hl-string">"fullName"</span> <span class="hl-attr">name</span>=<span class="hl-string">"full_name"</span> <span class="hl-tag">/&gt;</span>
+  <span class="hl-tag">&lt;br /&gt;</span>
+  <span class="hl-tag">&lt;label</span> <span class="hl-attr">for</span>=<span class="hl-string">"email"</span><span class="hl-tag">&gt;</span>Email:<span class="hl-tag">&lt;/label&gt;</span>
+  <span class="hl-tag">&lt;br /&gt;</span>
+  <span class="hl-tag">&lt;input</span> <span class="hl-attr">type</span>=<span class="hl-string">"text"</span> <span class="hl-attr">id</span>=<span class="hl-string">"email"</span> <span class="hl-attr">name</span>=<span class="hl-string">"email"</span> <span class="hl-tag">/&gt;</span>
+  <span class="hl-tag">&lt;br /&gt;&lt;br /&gt;</span>
+  <span class="hl-tag">&lt;input</span> <span class="hl-attr">type</span>=<span class="hl-string">"submit"</span> <span class="hl-attr">value</span>=<span class="hl-string">"Gửi"</span> <span class="hl-tag">/&gt;</span>
+<span class="hl-tag">&lt;/form&gt;</span></code></pre>
+            <h2>3.2. Form Attributes (Những thuộc tính của form)</h2>
+            <ul>
+              <li>
+                <b>action</b>: Thuộc tính <code>action</code> xác định hành động
+                sẽ được thực hiện khi biểu mẫu được gửi. Giá trị là một đường
+                dẫn.
+              </li>
+              <li>
+                <b>target</b>: Thuộc tính <code>target</code> chỉ định nơi hiển
+                thị phản hồi nhận được sau khi gửi biểu mẫu.
+              </li>
+              <li>
+                <b>method</b>: Thuộc tính <code>method</code> chỉ định giao thức
+                HTTP sẽ được sử dụng khi gửi dữ liệu biểu mẫu. Có 2 phương thức
+                là GET và POST.
+              </li>
+            </ul>
+            <h3>Phương thức GET:</h3>
+            <ul>
+              <li>Nối dữ liệu biểu mẫu vào URL, theo cặp name/value</li>
+              <li>
+                <b>KHÔNG BAO GIỜ</b> sử dụng GET để gửi dữ liệu bảo mật. Như tài
+                khoản, mật khẩu
+              </li>
+              <li>Độ dài của URL bị giới hạn (2048 ký tự)</li>
+            </ul>
+            <h3>Phương thức POST:</h3>
+            <ul>
+              <li>Dữ liệu biểu mẫu đã gửi không được hiển thị trong URL</li>
+              <li>
+                POST không có giới hạn về kích thước và có thể được sử dụng để
+                gửi một lượng lớn dữ liệu
+              </li>
+            </ul>
+            <h3>autocomplete</h3>
+            <ul>
+              <li>
+                Khi bật tính năng tự động điền, trình duyệt sẽ tự động gợi ý các
+                giá trị dựa trên các giá trị mà người dùng đã nhập trước đó
+              </li>
+            </ul>
+            <h3>novalidate</h3>
+            <ul>
+              <li>
+                Thuộc tính này đặc tả dữ liệu form không cần phải kiểm tra tính
+                chính xác dữ liệu khi gửi đi
+              </li>
+              <li>Ví dụ email không cần nhập đúng định dạng vẫn gửi được</li>
+            </ul>
+            <h2>3.3. Form Elements (Những element trong form)</h2>
+            <ul>
+              <li>
+                <b>&lt;input&gt;</b>: Có thể được hiển thị theo nhiều cách, tùy
+                thuộc vào thuộc tính <code>type</code>. Mặc định
+                <code>type="text"</code>
+              </li>
+              <li>
+                <b>&lt;label&gt;</b>: Xác định nhãn cho một số element trong
+                biểu mẫu. Thuộc tính <code>for</code> của thẻ
+                <code>&lt;label&gt;</code> phải bằng thuộc tính
+                <code>id</code> của phần tử <code>&lt;input&gt;</code> để liên
+                kết chúng lại với nhau.
+              </li>
+              <li>
+                <b>&lt;select&gt;</b>: Hiển thị dạng danh sách thả xuống
+                (dropdown). Các thẻ <code>&lt;option&gt;</code> xác định một tuỳ
+                chọn có thể được chọn.
+              </li>
+              <li>
+                <b>&lt;textarea&gt;</b>: Xác định trường nhập liệu nhiều dòng.
+              </li>
+              <li><b>&lt;button&gt;</b>: Xác định nút có thể nhấn</li>
+            </ul>
+            <h2>3.4. Input Types (Các kiểu của thẻ input)</h2>
+            <ul>
+              <li><code>&lt;input type="text"&gt;</code>: Dùng để nhập text</li>
+              <li>
+                <code>&lt;input type="email"&gt;</code>: Dùng để nhập email
+              </li>
+              <li>
+                <code>&lt;input type="password"&gt;</code>: Dùng để nhập mật
+                khẩu
+              </li>
+              <li>
+                <code>&lt;input type="number"&gt;</code>: Dùng để nhập số, không
+                nhập được chữ cái
+              </li>
+              <li>
+                <code>&lt;input type="date"&gt;</code>: Dùng để chọn: năm,
+                tháng, ngày
+              </li>
+              <li>
+                <code>&lt;input type="time"&gt;</code>: Dùng để chọn: giờ, phút,
+                giây
+              </li>
+              <li>
+                <code>&lt;input type="datetime-local"&gt;</code>: Dùng để chọn:
+                năm, tháng, ngày, giờ, phút, giây
+              </li>
+              <li>
+                <code>&lt;input type="file"&gt;</code>: Dùng để tải file lên
+              </li>
+              <li>
+                <code>&lt;input type="checkbox"&gt;</code>: Các hộp kiểm cho
+                phép người dùng chọn KHÔNG hoặc NHIỀU tuỳ chọn trong số các lựa
+                chọn hạn chế
+              </li>
+              <li>
+                <code>&lt;input type="radio"&gt;</code>: Các nút radio cho phép
+                người dùng CHỈ chọn MỘT trong số các lựa chọn
+              </li>
+              <li>
+                <code>&lt;input type="range"&gt;</code>: Tạo thanh trượt giá
+                trị. Phạm vi mặc định là từ 0 đến 100. Step mặc định là 1
+              </li>
+              <li>
+                <code>&lt;input type="color"&gt;</code>: Dùng để chọn màu sắc
+              </li>
+            </ul>
+            <h2>3.5. Input Attributes (Các thuộc tính của thẻ input)</h2>
+            <ul>
+              <li>
+                <b>value</b>: Thuộc tính <code>value</code> chỉ định giá trị ban
+                đầu cho trường đầu vào
+              </li>
+              <li>
+                <b>readonly</b>: Thuộc tính <code>readonly</code> xác định rằng
+                trường đầu vào là chỉ đọc
+              </li>
+              <li>
+                <b>disabled</b>: Thuộc tính <code>disabled</code> xác định rằng
+                một trường đầu vào sẽ bị vô hiệu hóa
+              </li>
+              <li>
+                <b>maxlength</b>: Thuộc tính <code>maxlength</code> chỉ định số
+                lượng ký tự tối đa được phép trong một trường đầu vào
+              </li>
+              <li>
+                <b>min</b> và <b>max</b>: Chỉ định các giá trị tối thiểu và tối
+                đa cho một trường đầu vào
+              </li>
+              <li>
+                <b>multiple</b>: Xác định rằng người dùng được phép nhập nhiều
+                hơn một giá trị vào trường đầu vào (áp dụng cho kiểu email,
+                file)
+              </li>
+              <li>
+                <b>placeholder</b>: Chỉ định một gợi ý ngắn để mô tả giá trị dự
+                kiến của trường đầu vào
+              </li>
+              <li>
+                <b>required</b>: Xác định rằng trường đầu vào phải được điền
+                trước khi gửi biểu mẫu
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>4. Những tính năng HTML5 có mà HTML không có</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <ul>
+              <li>
+                HTML5 được tích hợp video và âm thanh trong khi HTML thì không
+                có
+              </li>
+              <li>
+                HTML5 có thêm các thẻ semantic mới: <code>&lt;header&gt;</code>,
+                <code>&lt;footer&gt;</code>, <code>&lt;article&gt;</code>,
+                <code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code>, ...
+              </li>
+              <li>
+                Cung cấp các kiểu input mẫu mới như: date, time, email,...
+              </li>
+              <li>Thẻ <code>&lt;canvas&gt;</code> giúp cho việc vẽ sơ đồ 2D</li>
+              <li>Hỗ trợ CSS3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">
+      <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
+    </div>
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">
+        ← Trước
+      </button>
+      <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+        Tiếp →
+      </button>
+    </div>
+    <script>
+      let currentSlideIndex = 0;
+      let slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+      function updateSlideDisplay() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove("active");
+          if (index === currentSlideIndex) {
+            slide.classList.add("active");
+          }
+        });
+        document.getElementById("currentSlide").textContent =
+          currentSlideIndex + 1;
+        document.getElementById("totalSlides").textContent = totalSlides;
+        const progressBar = document.getElementById("progressBar");
+        const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
+        progressBar.style.width = progress + "%";
+        document.getElementById("prevBtn").disabled = currentSlideIndex === 0;
+        document.getElementById("nextBtn").disabled =
+          currentSlideIndex === totalSlides - 1;
+      }
+      function changeSlide(direction) {
+        const newIndex = currentSlideIndex + direction;
+        if (newIndex >= 0 && newIndex < totalSlides) {
+          currentSlideIndex = newIndex;
+          updateSlideDisplay();
+        }
+      }
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") changeSlide(-1);
+        if (e.key === "ArrowRight") changeSlide(1);
+        if (e.key === "Home") {
+          currentSlideIndex = 0;
+          updateSlideDisplay();
+        }
+        if (e.key === "End") {
+          currentSlideIndex = totalSlides - 1;
+          updateSlideDisplay();
+        }
+      });
+      updateSlideDisplay();
+    </script>
+  </body>
+</html>
