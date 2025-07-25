@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trường THPT Lê Văn Tám - Bài tập CSS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: block;
+        }
+
+        .header h1 {
+            display: inline-block;
+            color: #2c3e50;
+            font-size: 24px;
+            margin-right: 50px;
+        }
+
+        .nav-menu {
+            list-style-type: none;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .nav-menu a {
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a:active {
+            transform: translateY(0);
+        }
+
+        /* Container chính */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 20px;
+        }
+
+        /* Hero section */
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52,152,219,0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        /* Card sections */
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Bảng thông tin */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .info-table th {
+            background-color: #cc6600;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #999;
+            font-weight: bold;
+        }
+
+        .info-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
+        }
+
+        .info-table tr:hover {
+            background: #e3f2fd;
+        }
+
+        .info-table tr:hover td {
+            background: #e3f2fd;
+        }
+
+        /* Danh sách */
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            background: #f8f9fa;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            background: #e8f5e8;
+            transform: translateX(10px);
+        }
+
+        .feature-list li:first-child {
+            border-left-color: #e74c3c;
+        }
+
+        .feature-list li:last-child {
+            border-left-color: #f39c12;
+        }
+
+        /* Contact list */
+        .contact-list {
+            list-style-type: disc;
+            list-style-position: inside;
+            color: #3498db;
+        }
+
+        .contact-list li {
+            padding: 10px 0;
+            color: #2c3e50;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .contact-list li:last-child {
+            border-bottom: none;
+        }
+
+        .contact-list li:hover {
+            background: #f8f9fa;
+            padding-left: 10px;
+            border-radius: 5px;
+        }
+
+        /* Grid layout cho achievements */
+        .achievements {
+            display: block;
+        }
+
+        .achievement-item {
+            display: inline-block;
+            width: 30%;
+            margin: 1.5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            vertical-align: top;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: scale(1.05);
+        }
+
+        .achievement-item h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .achievement-item .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* News section với overflow */
+        .news-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .news-container {
+            height: 200px;
+            overflow: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .news-item {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            transition: background 0.3s ease;
+        }
+
+        .news-item:hover {
+            background: #f8f9fa;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            color: #3498db;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Special text với pseudo-elements */
+        .welcome-text {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 2px solid #ecf0f1;
+        }
+
+        .welcome-text::first-letter {
+            font-size: 4em;
+            color: #3498db;
+            float: left;
+            line-height: 1;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .welcome-text::selection {
+            background: #3498db;
+            color: white;
+        }
+
+        /* Testimonials với pseudo-elements */
+        .testimonial {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            border-left: 4px solid #3498db;
+        }
+
+        .testimonial::before {
+            content: "💬";
+            font-size: 2em;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: white;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .testimonial .author {
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: right;
+        }
+
+        /* Opacity effects */
+        .highlight-box {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .highlight-box:hover {
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .achievement-item {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .header h1 {
+                display: block;
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            
+            .nav-menu {
+                display: block;
+            }
+            
+            .nav-menu li {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>🏫 Trường THPT Lê Văn Tám</h1>
+            <ul class="nav-menu">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#news">Tin tức</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Container chính -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Chào mừng đến với Trường THPT Lê Văn Tám</h2>
+                <p>Ngôi trường với truyền thống 50 năm đào tạo và phát triển</p>
+            </div>
+        </section>
+
+        <!-- Giới thiệu -->
+        <section class="card">
+            <div class="welcome-text">
+                Trường Trung học Phổ thông Lê Văn Tám được thành lập năm 1974, là một trong những ngôi trường có truyền thống lâu đời tại thành phố Hồ Chí Minh. Với đội ngũ giáo viên giàu kinh nghiệm và cơ sở vật chất hiện đại, nhà trường luôn nỗ lực tạo ra môi trường học tập tốt nhất cho học sinh.
+            </div>
+        </section>
+
+        <!-- Thông tin chung -->
+        <section class="card">
+            <h3>📋 Thông tin chung</h3>
+            <table class="info-table">
+                <tr>
+                    <th>Thông tin</th>
+                    <th>Chi tiết</th>
+                    <th>Ghi chú</th>
+                </tr>
+                <tr>
+                    <td>Tổng số học sinh</td>
+                    <td>1,250 học sinh</td>
+                    <td>Khối 10-12</td>
+                </tr>
+                <tr>
+                    <td>Số lớp học</td>
+                    <td>36 lớp</td>
+                    <td>12 lớp/khối</td>
+                </tr>
+                <tr>
+                    <td>Giáo viên</td>
+                    <td>85 giáo viên</td>
+                    <td>Trình độ đại học trở lên</td>
+                </tr>
+                <tr>
+                    <td>Diện tích</td>
+                    <td>15,000 m²</td>
+                    <td>Bao gồm sân chơi</td>
+                </tr>
+                <tr>
+                    <td>Thành lập</td>
+                    <td>Năm 1974</td>
+                    <td>50 năm truyền thống</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Thành tựu -->
+        <section class="card">
+            <h3>🏆 Thành tựu nổi bật</h3>
+            <div class="achievements">
+                <div class="achievement-item">
+                    <span class="number">98%</span>
+                    <h4>Tỷ lệ tốt nghiệp</h4>
+                    <p>Học sinh tốt nghiệp THPT</p>
+                </div>
+                <div class="achievement-item">
+                    <span class="number">85%</span>
+                    <h4>Đậu đại học</h4>
+                    <p>Học sinh đậu các trường đại học</p>
+                </div>
+                <div class="achievement-item">
+                    <span class="number">150+</span>
+                    <h4>Giải thưởng</h4>
+                    <p>Các giải trong học tập và thể thao</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cơ sở vật chất -->
+        <section class="card">
+            <h3>🏗️ Cơ sở vật chất</h3>
+            <ul class="feature-list">
+                <li><strong>Phòng học hiện đại:</strong> 36 phòng học được trang bị máy chiếu, điều hòa</li>
+                <li><strong>Phòng thí nghiệm:</strong> 6 phòng thí nghiệm Lý, Hóa, Sinh đầy đủ thiết bị</li>
+                <li><strong>Thư viện:</strong> Hơn 10,000 đầu sách và tài liệu tham khảo</li>
+                <li><strong>Sân thể thao:</strong> Sân bóng đá, bóng chuyền, bóng rổ chuẩn</li>
+                <li><strong>Phòng máy tính:</strong> 60 máy tính kết nối internet tốc độ cao</li>
+                <li><strong>Căng tin:</strong> Phục vụ đầy đủ các bữa ăn dinh dưỡng</li>
+            </ul>
+        </section>
+
+        <!-- Tin tức -->
+        <section class="card">
+            <h3>📰 Tin tức mới nhất</h3>
+            <div class="news-section">
+                <div class="news-container">
+                    <div class="news-item">
+                        <div class="news-date">15/12/2024</div>
+                        <p><strong>Lễ khai giảng năm học 2024-2025</strong> - Trường tổ chức lễ khai giảng với sự tham dự của 1,250 học sinh và phụ huynh</p>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">10/12/2024</div>
+                        <p><strong>Học sinh lớp 12A1 đạt giải Nhất</strong> - Cuộc thi Khoa học Kỹ thuật cấp thành phố</p>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">05/12/2024</div>
+                        <p><strong>Khánh thành phòng thí nghiệm mới</strong> - Phòng thí nghiệm Hóa học với thiết bị hiện đại</p>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">01/12/2024</div>
+                        <p><strong>Hội thao học sinh khối 10</strong> - Tăng cường tinh thần đoàn kết và rèn luyện sức khỏe</p>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">28/11/2024</div>
+                        <p><strong>Chương trình từ thiện</strong> - Ủng hộ học sinh vùng khó khăn với số tiền 50 triệu đồng</p>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">25/11/2024</div>
+                        <p><strong>Thi Olympic Toán học</strong> - 3 học sinh đạt giải trong kỳ thi Olympic cấp tỉnh</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thông báo đặc biệt -->
+        <div class="highlight-box">
+            <h4>🎯 Thông báo quan trọng</h4>
+            <p>Nhà trường thông báo lịch thi học kỳ I năm học 2024-2025 sẽ diễn ra từ ngày 15/01 đến 25/01/2025. Học sinh cần chuẩn bị kỹ càng và liên hệ giáo viên chủ nhiệm để được hướng dẫn chi tiết.</p>
+        </div>
+
+        <!-- Cảm nhận học sinh -->
+        <section class="card">
+            <h3>💭 Học sinh nói gì về trường</h3>
+            
+            <div class="testimonial">
+                <p>"Tôi rất tự hào khi được học tại trường THPT Lê Văn Tám. Các thầy cô rất tận tâm và môi trường học tập thực sự tuyệt vời."</p>
+                <div class="author">- Nguyễn Minh Anh, lớp 12A1</div>
+            </div>
+
+            <div class="testimonial">
+                <p>"Trường có nhiều hoạt động ngoại khóa bổ ích, giúp chúng em phát triển toàn diện cả về học tập và kỹ năng sống."</p>
+                <div class="author">- Trần Văn Bình, lớp 11B2</div>
+            </div>
+
+            <div class="testimonial">
+                <p>"Cơ sở vật chất hiện đại, thư viện phong phú, là nơi lý tưởng để chúng em học tập và nghiên cứu."</p>
+                <div class="author">- Lê Thị Cúc, lớp 10C3</div>
+            </div>
+        </section>
+
+        <!-- Thông tin liên hệ -->
+        <section class="card">
+            <h3>📞 Thông tin liên hệ</h3>
+            <ul class="contact-list">
+                <li>Địa chỉ: 145 Pasteur, Phường Võ Thị Sáu, Quận 3, TP.HCM</li>
+                <li>Điện thoại: 028-3829-7456</li>
+                <li>Email: thptlevantam@edu.hcm.vn</li>
+                <li>Website: www.thptlevantam.edu.vn</li>
+                <li>Fanpage: Trường THPT Lê Văn Tám</li>
+                <li>Giờ làm việc: 7:00 - 17:00 (Thứ 2 - Thứ 6)</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Trường THPT Lê Văn Tám. Bài tập thực hành CSS cơ bản.</p>
+        <p>Đào tạo thế hệ trẻ tài năng cho tương lai đất nước</p>
+    </footer>
+</body>
+</html>
