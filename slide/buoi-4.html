@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buổi 4: Học CSS, CSS3 cơ bản</title>
+    <style>
+      /* Giữ nguyên toàn bộ CSS từ buoi-3.html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #e3f2fd 0%,
+          #bbdefb 50%,
+          #90caf9 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(33, 150, 243, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(13, 71, 161, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+      .slide-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(33, 150, 243, 0.2);
+        width: 100%;
+        max-width: 1000px;
+        height: 700px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid rgba(33, 150, 243, 0.1);
+      }
+      .slide {
+        display: none;
+        height: 100%;
+        animation: slideIn 0.5s ease-in-out;
+      }
+      .slide.active {
+        display: flex;
+        flex-direction: column;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .intro-slide {
+        background: linear-gradient(45deg, #0d47a1, #1976d2, #42a5f5, #64b5f6);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .intro-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 60%,
+            rgba(255, 255, 255, 0.08) 0%,
+            transparent 50%
+          );
+        animation: floatingOrbs 12s ease-in-out infinite;
+      }
+      @keyframes floatingOrbs {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        33% {
+          transform: translateY(-20px) rotate(120deg);
+        }
+        66% {
+          transform: translateY(10px) rotate(240deg);
+        }
+      }
+      .intro-slide::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%
+        );
+        animation: shimmer 3s ease-in-out infinite;
+        transform: translateX(-100%);
+      }
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      .intro-content {
+        z-index: 10;
+        position: relative;
+        animation: contentFloat 6s ease-in-out infinite;
+      }
+      @keyframes contentFloat {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .club-name {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+          0 0 40px rgba(33, 150, 243, 0.8);
+        background: linear-gradient(45deg, #fff, #e3f2fd, #fff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: textGlow 4s ease-in-out infinite;
+        position: relative;
+      }
+      @keyframes textGlow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+          filter: brightness(1);
+        }
+        50% {
+          background-position: 100% 50%;
+          filter: brightness(1.2);
+        }
+      }
+      .club-name::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: sparkle 2s linear infinite;
+        z-index: -1;
+      }
+      @keyframes sparkle {
+        0% {
+          transform: translateX(-100%) rotate(30deg);
+        }
+        100% {
+          transform: translateX(100%) rotate(30deg);
+        }
+      }
+      .course-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #e3f2fd;
+        text-shadow: 0 0 15px rgba(227, 242, 253, 0.8);
+        animation: titlePulse 3s ease-in-out infinite;
+      }
+      @keyframes titlePulse {
+        0%,
+        100% {
+          transform: scale(1);
+          text-shadow: 0 0 15px rgba(227, 242, 253, 0.8);
+        }
+        50% {
+          transform: scale(1.05);
+          text-shadow: 0 0 25px rgba(227, 242, 253, 1);
+        }
+      }
+      .lesson-info {
+        font-size: 1.8rem;
+        font-weight: 500;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.1)
+        );
+        padding: 25px 50px;
+        border-radius: 25px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        animation: cardFloat 4s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+      @keyframes cardFloat {
+        0%,
+        100% {
+          transform: translateY(0px) rotateX(0deg);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        50% {
+          transform: translateY(-8px) rotateX(2deg);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+        }
+      }
+      .lesson-info::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        animation: lessonShine 3s ease-in-out infinite;
+      }
+      @keyframes lessonShine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: particleFloat 8s linear infinite;
+      }
+      @keyframes particleFloat {
+        0% {
+          transform: translateY(100vh) translateX(0px);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) translateX(100px);
+          opacity: 0;
+        }
+      }
+      .particle:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(2) {
+        left: 20%;
+        animation-delay: 1s;
+        animation-duration: 8s;
+      }
+      .particle:nth-child(3) {
+        left: 30%;
+        animation-delay: 2s;
+        animation-duration: 7s;
+      }
+      .particle:nth-child(4) {
+        left: 40%;
+        animation-delay: 3s;
+        animation-duration: 9s;
+      }
+      .particle:nth-child(5) {
+        left: 50%;
+        animation-delay: 4s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(6) {
+        left: 60%;
+        animation-delay: 5s;
+        animation-duration: 8s;
+      }
+      .particle:nth-child(7) {
+        left: 70%;
+        animation-delay: 6s;
+        animation-duration: 7s;
+      }
+      .particle:nth-child(8) {
+        left: 80%;
+        animation-delay: 7s;
+        animation-duration: 9s;
+      }
+      .particle:nth-child(9) {
+        left: 90%;
+        animation-delay: 8s;
+        animation-duration: 6s;
+      }
+      .particle:nth-child(10) {
+        left: 95%;
+        animation-delay: 9s;
+        animation-duration: 8s;
+      }
+      .overview-slide {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+      }
+      .overview-header {
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+      }
+      .overview-header h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .overview-content {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+      .overview-list {
+        list-style: none;
+        counter-reset: item;
+        max-width: 100%;
+      }
+      .overview-list li {
+        counter-increment: item;
+        background: white;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.1);
+        border-left: 5px solid #2196f3;
+        transition: all 0.3s ease;
+        position: relative;
+        margin-left: 20px;
+      }
+      .overview-list li:hover {
+        transform: translateX(10px);
+        box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2);
+      }
+      .overview-list li::before {
+        content: counter(item);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #2196f3;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+      .overview-list li h3 {
+        color: #1976d2;
+        margin-bottom: 8px;
+        font-size: 1.2rem;
+      }
+      .overview-list li p {
+        color: #666;
+        line-height: 1.5;
+      }
+      .content-slide {
+        background: #f8f9fa;
+      }
+      .content-header {
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 25px 40px;
+        text-align: center;
+        position: relative;
+        border-bottom: 3px solid #0d47a1;
+      }
+      .content-header::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 6px;
+        background: #ffeb3b;
+        border-radius: 3px;
+      }
+      .content-header h1 {
+        font-size: 2.2rem;
+        font-weight: 600;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .content-body {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+      }
+      .content-section {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 20px rgba(33, 150, 243, 0.08);
+        border: 1px solid rgba(33, 150, 243, 0.1);
+      }
+      .content-section h2 {
+        color: #1976d2;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e3f2fd;
+        padding-bottom: 10px;
+      }
+      .content-section h3 {
+        color: #1976d2;
+        font-size: 1.4rem;
+        margin: 20px 0 15px 0;
+      }
+      .content-section h4 {
+        color: #1976d2;
+        font-size: 1.2rem;
+        margin: 15px 0 10px 0;
+      }
+      .content-section p {
+        color: #444;
+        line-height: 1.8;
+        margin-bottom: 15px;
+        font-size: 1.05rem;
+      }
+      .content-section ul,
+      .content-section ol {
+        margin: 15px 0;
+        padding-left: 25px;
+      }
+      .content-section li {
+        color: #444;
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+      /* Code block style: giữ nguyên, áp dụng cho pre.code-block */
+      pre.code-block {
+        background: #263238;
+        color: #eceff1;
+        padding: 24px 32px 24px 40px;
+        border-radius: 12px;
+        font-family: "Fira Mono", "Courier New", monospace;
+        font-size: 1rem;
+        margin: 28px 0;
+        overflow-x: auto;
+        border-left: 6px solid #ff5722;
+        position: relative;
+        box-shadow: 0 2px 12px rgba(33, 150, 243, 0.07);
+        tab-size: 2;
+        white-space: pre;
+      }
+      pre.code-block::before {
+        content: "CODE";
+        position: absolute;
+        top: 8px;
+        right: 18px;
+        background: #ff5722;
+        color: white;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        opacity: 0.85;
+      }
+      .code-block span.tag,
+      .code-block span.attribute,
+      .code-block span.string,
+      .code-block span.comment {
+        display: inline-block;
+        padding-left: 18px;
+        text-indent: 0;
+      }
+      .code-block span.tag {
+        color: #ff9800;
+      }
+      .code-block span.attribute {
+        color: #2196f3;
+      }
+      .code-block span.string {
+        color: #4caf50;
+      }
+      .code-block span.comment {
+        color: #4caf50;
+        font-style: italic;
+      }
+      .code-block br {
+        line-height: 2.1;
+      }
+      .code-block span:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+      .image-placeholder {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border: 2px dashed #2196f3;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        color: #1976d2;
+        margin: 20px 0;
+        font-style: italic;
+      }
+      .highlight {
+        background: linear-gradient(120deg, #fff3e0 0%, #ffe0b2 100%);
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-weight: 600;
+        color: #e65100;
+      }
+      .navigation {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        z-index: 100;
+      }
+      .nav-btn {
+        background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+      }
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+      }
+      .nav-btn:disabled {
+        background: #bdbdbd;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+      .slide-counter {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        z-index: 100;
+      }
+      .progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #2196f3 0%, #21cbf3 100%);
+        transition: width 0.3s ease;
+        border-radius: 0 0 2px 0;
+      }
+      /* Table styling for slides */
+      .content-section table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(33, 150, 243, 0.07);
+        margin: 20px 0;
+      }
+      .content-section th,
+      .content-section td {
+        padding: 14px 18px;
+        border-bottom: 1px solid #e3f2fd;
+        text-align: left;
+      }
+      .content-section th {
+        background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+        color: #fff;
+        font-weight: 600;
+        border-bottom: 2px solid #1976d2;
+      }
+      .content-section tr:last-child td {
+        border-bottom: none;
+      }
+      .content-section tbody tr:hover {
+        background: #e3f2fd;
+        transition: background 0.2s;
+      }
+      pre.code-block code {
+        color: #eceff1;
+        font-family: "Fira Mono", "Courier New", monospace;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      /* Highlight tag, attribute, string, comment */
+      pre.code-block code .hl-tag {
+        color: #ff9800;
+      }
+      pre.code-block code .hl-attr {
+        color: #42a5f5;
+      }
+      pre.code-block code .hl-string {
+        color: #4caf50;
+      }
+      pre.code-block code .hl-comment {
+        color: #b0bec5;
+        font-style: italic;
+      }
+      @media (max-width: 768px) {
+        .slide-container {
+          height: 90vh;
+        }
+        .club-name {
+          font-size: 2rem;
+        }
+        .course-title {
+          font-size: 1.5rem;
+        }
+        .lesson-info {
+          font-size: 1.3rem;
+          padding: 15px 25px;
+        }
+        .content-body {
+          padding: 20px;
+        }
+        .slide-counter {
+          bottom: 15px;
+          right: 15px;
+          padding: 8px 15px;
+          font-size: 0.9rem;
+        }
+        .content-section table,
+        .content-section thead,
+        .content-section tbody,
+        .content-section th,
+        .content-section td,
+        .content-section tr {
+          display: block;
+        }
+        .content-section th,
+        .content-section td {
+          padding: 10px 8px;
+        }
+        .content-section th {
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="progress-bar" id="progressBar"></div>
+      <!-- Slide 1: Giới thiệu -->
+      <div class="slide intro-slide active">
+        <div class="intro-content">
+          <h1 class="club-name">Phenikaa Techlearn Club</h1>
+          <h2 class="course-title">Khóa học HTML, CSS cơ bản</h2>
+          <div class="lesson-info">
+            <span>Buổi 4: Học CSS, CSS3 cơ bản</span>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2: Tóm tắt nội dung -->
+      <div class="slide overview-slide">
+        <div class="overview-header">
+          <h1>Tóm tắt nội dung</h1>
+        </div>
+        <div class="overview-content">
+          <ul class="overview-list">
+            <li><h3>Khái niệm, cú pháp, selectors</h3></li>
+            <li><h3>3 kiểu chèn CSS</h3></li>
+            <li><h3>Colors (Màu sắc), Backgrounds (Nền)</h3></li>
+            <li><h3>Box Model, Borders, Padding, Margins</h3></li>
+            <li><h3>Thuộc tính height, width</h3></li>
+            <li><h3>Text, Fonts, Icons</h3></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Slide 3+: Nội dung từng mục lớn -->
+      <!-- Các slide nội dung được chuyển từ Markdown BUOI-4.md -->
+
+      <!-- Slide: 01. Khái niệm, cú pháp, selectors -->
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>01. Khái niệm, cú pháp, selectors</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <h2>1.1. Khái niệm</h2>
+            <ul>
+              <li><b>CSS</b>: viết tắt của Cascading Style Sheets</li>
+              <li>
+                Là ngôn ngữ được dùng để định dạng kiểu hiển thị cho các phần tử
+                HTML
+              </li>
+            </ul>
+            <h2>1.2. Cú pháp</h2>
+            <pre class="code-block"><code><span class="hl-tag">selector</span> {
+  <span class="hl-attr">property</span>: <span class="hl-string">value</span>;
+}</code></pre>
+            <div class="highlight">Trong đó:</div>
+            <ul>
+              <li><b>selector</b>: Được gọi là bộ chọn</li>
+              <li><b>property</b>: Được gọi là thuộc tính</li>
+              <li><b>value</b>: Được gọi là giá trị của thuộc tính</li>
+            </ul>
+            <h2>1.3. Selectors (Bộ chọn)</h2>
+            <div>Bộ chọn CSS chọn (các) phần tử HTML mà bạn muốn tạo kiểu.</div>
+            <div>Bộ chọn CSS được chia thành 5 loại:</div>
+            <ul>
+              <li>Simple selectors (Bộ chọn đơn giản)</li>
+              <li>Combinator selectors (Bộ chọn tổ hợp)</li>
+              <li>Pseudo-class selectors (Bộ chọn lớp giả)</li>
+              <li>Pseudo-elements selectors (Bộ chọn phần tử giả)</li>
+              <li>Attribute selectors (Bộ chọn thuộc tính)</li>
+            </ul>
+            <h2>1.4. Simple selectors (Bộ chọn đơn giản)</h2>
+            <h3>Bộ chọn element (element selector)</h3>
+            <div>Chọn các phần tử HTML dựa trên tên phần tử.</div>
+            <pre class="code-block"><code><span class="hl-tag">p</span> {
+  <span class="hl-attr">text-align</span>: <span class="hl-string">center</span>;
+  <span class="hl-attr">color</span>: <span class="hl-string">red</span>;
+}</code></pre>
+            <h3>Bộ chọn id (id selector)</h3>
+            <div>
+              Sử dụng thuộc tính id của một phần tử HTML để chọn một phần tử cụ
+              thể.
+            </div>
+            <div class="highlight">
+              Lưu ý: Tên id không được bắt đầu bằng số.
+            </div>
+            <pre class="code-block"><code><span class="hl-tag">#title</span> {
+  <span class="hl-attr">text-align</span>: <span class="hl-string">center</span>;
+  <span class="hl-attr">color</span>: <span class="hl-string">red</span>;
+}</code></pre>
+            <h3>Bộ chọn class (class selector)</h3>
+            <div>Chọn các thành phần HTML với một thuộc tính class cụ thể.</div>
+            <div class="highlight">
+              Lưu ý: Tên class không được bắt đầu bằng số.
+            </div>
+            <pre class="code-block"><code><span class="hl-tag">.title</span> {
+  <span class="hl-attr">text-align</span>: <span class="hl-string">center</span>;
+  <span class="hl-attr">color</span>: <span class="hl-string">red</span>;
+}</code></pre>
+            <h3>Bộ chọn chung (universal selector)</h3>
+            <div>Chọn tất cả các thành phần HTML trên trang.</div>
+            <pre class="code-block"><code><span class="hl-tag">*</span> {
+  <span class="hl-attr">text-align</span>: <span class="hl-string">center</span>;
+  <span class="hl-attr">color</span>: <span class="hl-string">red</span>;
+}</code></pre>
+            <h3>Bộ chọn nhóm (grouping selector)</h3>
+            <div>
+              Chọn tất cả các element, id, class có cùng thuộc tính và giá trị
+              thuộc tính.
+            </div>
+            <pre class="code-block"><code><span class="hl-tag">h1</span>,
+<span class="hl-tag">h2</span>,
+<span class="hl-tag">p</span> {
+  <span class="hl-attr">text-align</span>: <span class="hl-string">center</span>;
+  <span class="hl-attr">color</span>: <span class="hl-string">red</span>;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide: 02. 3 kiểu chèn CSS -->
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>02. 3 kiểu chèn CSS</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <h2>2.1. Inline CSS (Nội tuyến)</h2>
+            <ul>
+              <li>
+                Thêm thuộc tính <code>style</code> vào trong thẻ mà muốn sửa CSS
+              </li>
+              <li>
+                Có thể được sử dụng để áp dụng một kiểu duy nhất cho một element
+              </li>
+            </ul>
+            <pre
+              class="code-block"
+            ><code><span class="hl-tag">&lt;p</span> <span class="hl-attr">style</span>=<span class="hl-string">"color:red;"</span><span class="hl-tag">&gt;</span>This is a paragraph.<span class="hl-tag">&lt;/p&gt;</span></code></pre>
+            <h2>2.2. Internal CSS (Nội bộ)</h2>
+            <ul>
+              <li>
+                Thêm thẻ <code>&lt;style&gt;&lt;/style&gt;</code> vào trong file
+                HTML
+              </li>
+              <li>
+                Thường thì thẻ <code>&lt;style&gt;</code> này sẽ nằm trong thẻ
+                <code>&lt;head&gt;&lt;/head&gt;</code>
+              </li>
+              <li>Có thể được sử dụng nếu có một trang HTML duy nhất</li>
+            </ul>
+            <pre
+              class="code-block"
+            ><code><span class="hl-tag">&lt;style&gt;</span>
+  <span class="hl-tag">p</span> {
+    <span class="hl-attr">color</span>: <span class="hl-string">red</span>;
+  }
+<span class="hl-tag">&lt;/style&gt;</span></code></pre>
+            <h2>2.3. External CSS (Bên ngoài)</h2>
+            <ul>
+              <li>Tạo một file CSS ở bên ngoài</li>
+              <li>
+                Sử dụng thẻ <code>&lt;link /&gt;</code> đặt trong thẻ
+                <code>&lt;head&gt;&lt;/head&gt;</code>
+              </li>
+              <li>
+                Chèn đường dẫn vào thuộc tính <code>href</code> trong thẻ link
+              </li>
+              <li>
+                Có thể thay đổi giao diện của toàn bộ trang web bằng cách chỉ
+                thay đổi một tệp
+              </li>
+            </ul>
+            <pre
+              class="code-block"
+            ><code><span class="hl-tag">&lt;link</span> <span class="hl-attr">rel</span>=<span class="hl-string">"stylesheet"</span> <span class="hl-attr">href</span>=<span class="hl-string">"mystyle.css"</span> <span class="hl-tag">/&gt;</span></code></pre>
+            <h2>Lưu ý về thứ tự ưu tiên</h2>
+            <div>
+              Nếu trùng bộ chọn và tên thuộc tính, thì giá trị của bộ chọn cuối
+              cùng được sử dụng.
+            </div>
+            <pre class="code-block"><code><span class="hl-tag">h1</span> {
+  <span class="hl-attr">color</span>: <span class="hl-string">navy</span>;
+}
+<span class="hl-tag">h1</span> {
+  <span class="hl-attr">color</span>: <span class="hl-string">orange</span>;
+}</code></pre>
+            <div class="highlight">→ Màu được chọn sẽ là màu orange.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide: 03. Colors (Màu sắc), Backgrounds (Nền) -->
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>03. Colors (Màu sắc), Backgrounds (Nền)</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <h2>3.1. Colors (Màu sắc)</h2>
+            <div><b>Các cách định nghĩa màu:</b></div>
+            <ul>
+              <li>
+                Màu được đặt tên sẵn: white, black, red, green, blue, yellow,
+                orange,... (ít sử dụng)
+              </li>
+              <li>HEX (Phổ biến nhất)</li>
+              <li>RGB (ít sử dụng)</li>
+              <li>HSL (cực ít sử dụng)</li>
+            </ul>
+            <h3>HEX (Phổ biến nhất)</h3>
+            <ul>
+              <li>Màu HEX được chỉ định bằng: <code>#RRGGBB</code></li>
+              <li>
+                Các số nguyên thập lục phân RR (đỏ), GG (xanh lục) và BB (xanh
+                dương) chỉ định các thành phần của màu
+              </li>
+              <li>Cú pháp: <code>#RRGGBB</code></li>
+            </ul>
+            <div><b>Ví dụ:</b></div>
+            <ul>
+              <li>#000000 (màu đen)</li>
+              <li>#FFFFFF (màu trắng)</li>
+              <li>#FF0000 (màu đỏ)</li>
+            </ul>
+            <pre class="code-block"><code><span class="hl-tag">h1</span> {
+  <span class="hl-attr">color</span>: <span class="hl-string">#ff0000</span>;
+}</code></pre>
+            <div class="highlight">
+              Công cụ hỗ trợ: Cài đặt phần mềm Just Color Picker
+            </div>
+            <h2>3.2. Backgrounds (Nền)</h2>
+            <div>Dùng để thêm nền vào cho element.</div>
+            <h3>background-color</h3>
+            <div>Nền là màu sắc</div>
+            <pre class="code-block"><code><span class="hl-tag">body</span> {
+  <span class="hl-attr">background-color</span>: <span class="hl-string">lightblue</span>;
+}</code></pre>
+            <h3>background-clip</h3>
+            <div>
+              Xác định phạm vi được thiết lập màu nền của phần tử (Áp dụng cho
+              background là màu sắc)
+            </div>
+            <ul>
+              <li>
+                <b>border-box</b>: Mặc định. Đổ màu từ content cho đến hết
+                border
+              </li>
+              <li><b>padding-box</b>: Đổ màu từ content cho đến hết padding</li>
+              <li><b>content-box</b>: Chỉ đổ màu phần content</li>
+            </ul>
+            <h3>background-image</h3>
+            <div>Nền là hình ảnh hoặc màu gradient.</div>
+            <div><b>Với hình ảnh:</b></div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background-image</span>: <span class="hl-string">url("hinh-anh.jpg")</span>;</code></pre>
+            <div>
+              <b>Với nhiều hình ảnh</b> (url nào ở trước thì sẽ nằm bên trên):
+            </div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background-image</span>: <span class="hl-string">url("hinh-1.png")</span>, <span class="hl-string">url("hinh-2.jpg")</span>;</code></pre>
+            <div><b>Với gradient:</b></div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background-image</span>: <span class="hl-string">linear-gradient(180deg, #000000, #ffffff)</span>;</code></pre>
+            <div><b>Kết hợp cả hình ảnh và gradient:</b></div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background-image</span>: <span class="hl-string">linear-gradient(180deg, #00000080, #ffffffad)</span>,
+  <span class="hl-string">url("hinh-anh.jpg")</span>;</code></pre>
+            <h3>background-size</h3>
+            <div>Kích thước của background.</div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background-size</span>: <span class="hl-string">100% auto</span>;</code></pre>
+            <ul>
+              <li>
+                <b>contain</b>: co dãn hình ảnh để hình ảnh nằm trọn trong khung
+                element, hình ảnh không bị vỡ
+              </li>
+              <li>
+                <b>cover</b>: kéo dãn hình ảnh sao cho vừa với khung, cắt bỏ đi
+                những phần ảnh thừa để hình ảnh không bị vỡ
+              </li>
+            </ul>
+            <h3>background-repeat</h3>
+            <div>Nền được lặp lại hay không.</div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background-repeat</span>: <span class="hl-string">no-repeat</span>; <span class="hl-comment">/* Không lặp lại ảnh */</span>
+<span class="hl-attr">background-repeat</span>: <span class="hl-string">repeat-x</span>; <span class="hl-comment">/* Lặp theo trục ngang */</span>
+<span class="hl-attr">background-repeat</span>: <span class="hl-string">repeat-y</span>; <span class="hl-comment">/* Lặp theo trục dọc */</span></code></pre>
+            <h3>background-position</h3>
+            <div>
+              Vị trí hình nền so với element. Có các giá trị: top, left, right,
+              bottom, center.
+            </div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background-position</span>: <span class="hl-string">top left</span>; <span class="hl-comment">/* trên - trái */</span>
+<span class="hl-attr">background-position</span>: <span class="hl-string">top right</span>; <span class="hl-comment">/* trên - phải */</span>
+<span class="hl-attr">background-position</span>: <span class="hl-string">top center</span>; <span class="hl-comment">/* trên - giữa */</span>
+<span class="hl-attr">background-position</span>: <span class="hl-string">bottom left</span>; <span class="hl-comment">/* dưới - trái */</span>
+<span class="hl-attr">background-position</span>: <span class="hl-string">bottom right</span>; <span class="hl-comment">/* dưới - phải */</span>
+<span class="hl-attr">background-position</span>: <span class="hl-string">bottom 30px right 20px</span>; <span class="hl-comment">/* cách dưới 30px - cách phải 20px */</span></code></pre>
+            <h3>background-attachment</h3>
+            <div>Nền sẽ được cuộn hoặc cố định.</div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background-attachment</span>: <span class="hl-string">fixed</span>; <span class="hl-comment">/* Hình nền được fix cố định khi di cuộn web */</span></code></pre>
+            <h3>background-origin</h3>
+            <div>
+              Giống background-clip, nhưng background-clip là dành cho nền là
+              màu sắc, còn background-origin là dùng cho nền ảnh.
+            </div>
+            <ul>
+              <li><b>content-box</b>: background chỉ chiếm phần content</li>
+              <li>
+                <b>padding-box</b>: background chiếm phần content và padding
+              </li>
+              <li>
+                <b>border-box</b>: background chiếm phần content, padding và
+                border
+              </li>
+            </ul>
+            <h3>background (cách viết ngắn)</h3>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">background</span>: <span class="hl-string">#ffffff url("hinh-anh.png") no-repeat top right</span>;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide: 04. Box Model, Borders, Padding, Margins -->
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>04. Box Model, Borders, Padding, Margins</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <h2>4.1. Box Model (Mô hình hộp)</h2>
+            <div>
+              Tất cả các element có thể được coi là các cái hộp. Hộp này bao
+              gồm:
+            </div>
+            <ul>
+              <li>
+                <b>Content (Nội dung)</b>: Nội dung của element, nơi văn bản và
+                hình ảnh xuất hiện
+              </li>
+              <li>
+                <b>Padding</b>: Tạo một khoảng trống xung quanh nội dung. Phần
+                đệm trong suốt
+              </li>
+              <li>
+                <b>Border (Đường viền)</b>: Đường viền bao quanh padding (phần
+                đệm) và nội dung
+              </li>
+              <li>
+                <b>Margin (Lề)</b>: Tạo khoảng cách cho vùng bên ngoài border
+                (đường viền). Lề trong suốt
+              </li>
+            </ul>
+            <div class="highlight">
+              Tip: Vào dev tools chọn tab Computed sẽ thấy sơ đồ của một element
+              dùng để biểu diễn cho element ta đã chọn.
+            </div>
+            <h2>4.2. Borders (Đường viền)</h2>
+            <div>
+              Đường viền bao quanh padding (phần đệm) và nội dung. Dùng để bao
+              bọc 1 element.
+            </div>
+            <h3>border-style</h3>
+            <div>Các kiểu border:</div>
+            <ul>
+              <li><b>dotted</b>: Đường viền chấm</li>
+              <li><b>dashed</b>: Đường viền nét đứt</li>
+              <li><b>solid</b>: Đường viền liền</li>
+              <li><b>double</b>: Đường viền kép</li>
+              <li><b>groove</b>: Đường viền có rãnh 3D</li>
+              <li><b>ridge</b>: Đường viền có gờ 3D</li>
+              <li><b>inset</b>: Đường viền 3D chìm vào trong</li>
+              <li><b>outset</b>: Đường viền 3D nổi lên trên</li>
+              <li><b>none</b>: Không có viền</li>
+              <li><b>hidden</b>: Đường viền bị ẩn</li>
+            </ul>
+            <pre class="code-block"><code><span class="hl-tag">p</span> {
+  <span class="hl-attr">border</span>: <span class="hl-string">5px solid red</span>;
+}</code></pre>
+            <h2>4.3. Padding (Phần đệm)</h2>
+            <div>
+              Padding (phần đệm) tạo một khoảng trống xung quanh nội dung, và
+              nằm bên trong đường viền.
+            </div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">padding</span>: <span class="hl-string">10px</span>;</code></pre>
+            <h2>4.4. Margins (Lề)</h2>
+            <div>
+              Margin (Lề) để tạo khoảng cách giữa element này với element khác.
+              Margin nằm bên ngoài border.
+            </div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">margin</span>: <span class="hl-string">10px</span>;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide: 05. Thuộc tính height, width -->
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>05. Thuộc tính height, width</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <ul>
+              <li><b>height</b>: Chiều cao của element</li>
+              <li><b>width</b>: Chiều rộng của element</li>
+              <li><b>min-height</b>: chiều cao tối thiểu của element</li>
+              <li><b>min-width</b>: chiều rộng tối thiểu của element</li>
+              <li><b>max-height</b>: chiều cao tối đa của element</li>
+              <li><b>max-width</b>: chiều rộng tối đa của element</li>
+            </ul>
+            <div class="highlight">
+              Lưu ý: Chiều cao và chiều rộng là của phần content nằm bên trong
+              phần padding. Không bao gồm padding, border, margin.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide: 06. Text, Fonts, Icons -->
+      <div class="slide content-slide">
+        <div class="content-header">
+          <h1>06. Text, Fonts, Icons</h1>
+        </div>
+        <div class="content-body">
+          <div class="content-section">
+            <h2>6.1. Text</h2>
+            <h3>Text Color</h3>
+            <div>
+              Thuộc tính <code>color</code> được sử dụng để đặt màu cho văn bản.
+            </div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">color</span>: <span class="hl-string">green</span>;</code></pre>
+            <h3>Text Align</h3>
+            <div>Được sử dụng để thiết lập căn lề ngang của văn bản.</div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">text-align</span>: <span class="hl-string">center</span>; <span class="hl-comment">/* Căn giữa */</span>
+<span class="hl-attr">text-align</span>: <span class="hl-string">left</span>; <span class="hl-comment">/* Căn trái */</span>
+<span class="hl-attr">text-align</span>: <span class="hl-string">right</span>; <span class="hl-comment">/* Căn phải */</span>
+<span class="hl-attr">text-align</span>: <span class="hl-string">justify</span>; <span class="hl-comment">/* Căn đều 2 bên */</span></code></pre>
+            <h3>Text Transform</h3>
+            <div>
+              Thuộc tính <code>text-transform</code> được sử dụng để chỉ định
+              chữ hoa và chữ thường trong văn bản.
+            </div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">text-transform</span>: <span class="hl-string">uppercase</span>; <span class="hl-comment">/* VIẾT CHỮ HOA */</span>
+<span class="hl-attr">text-transform</span>: <span class="hl-string">lowercase</span>; <span class="hl-comment">/* viết chữ thường */</span>
+<span class="hl-attr">text-transform</span>: <span class="hl-string">capitalize</span>; <span class="hl-comment">/* Viết Hoa Các Chữ Cái Đầu */</span></code></pre>
+            <h2>6.2. Fonts</h2>
+            <h3>Các họ phông chữ trong CSS</h3>
+            <ul>
+              <li>
+                <b>Serif (có chân)</b>: có một nét nhỏ ở các cạnh của mỗi chữ
+                cái
+              </li>
+              <li>
+                <b>Sans-serif (không chân)</b>: có đường kẻ rõ ràng (không có
+                nét nhỏ đi kèm)
+              </li>
+              <li>
+                <b>Monospace (Đơn cách)</b>: tất cả các chữ cái có cùng chiều
+                rộng cố định
+              </li>
+              <li>
+                <b>Cursive (Chữ viết ẩu)</b>: bắt chước chữ viết tay của con
+                người
+              </li>
+              <li>
+                <b>Fantasy (tưởng tượng)</b>: phông chữ trang trí/vui tươi
+              </li>
+            </ul>
+            <h3>font-family</h3>
+            <div>Để chỉ định font chữ của văn bản.</div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">font-family</span>: <span class="hl-string">"Times New Roman", Times, serif</span>;
+<span class="hl-attr">font-family</span>: <span class="hl-string">Arial, Helvetica, sans-serif</span>;
+<span class="hl-attr">font-family</span>: <span class="hl-string">"Lucida Console", "Courier New", monospace</span>;</code></pre>
+            <div class="highlight">
+              Tài nguyên: Trang Google Fonts:
+              <a href="https://fonts.google.com/" target="_blank"
+                >https://fonts.google.com/</a
+              >
+            </div>
+            <h3>font-style</h3>
+            <div>
+              Thuộc tính <code>font-style</code> chủ yếu được sử dụng để chỉ
+              định văn bản in nghiêng.
+            </div>
+            <ul>
+              <li><b>normal</b>: Văn bản được hiển thị bình thường</li>
+              <li><b>italic</b>: Văn bản được hiển thị in nghiêng</li>
+              <li>
+                <b>oblique</b>: Văn bản "nghiêng" (xiên rất giống với chữ
+                nghiêng, nhưng nghiêng hơn và ít được sử dụng)
+              </li>
+            </ul>
+            <h3>font-weight</h3>
+            <div>
+              Thuộc tính <code>font-weight</code> để chỉ định độ dày của chữ.
+            </div>
+            <div>
+              Giá trị có thể là: normal, bold, 100, 200, 300,..., 800, 900
+            </div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">font-weight</span>: <span class="hl-string">700</span>;
+<span class="hl-attr">font-weight</span>: <span class="hl-string">bold</span>;
+<span class="hl-attr">font-weight</span>: <span class="hl-string">normal</span>;
+<span class="hl-attr">font-weight</span>: <span class="hl-string">400</span>;</code></pre>
+            <h3>font-size</h3>
+            <div>
+              Thuộc tính <code>font-size</code> dùng để đặt kích thước của văn
+              bản.
+            </div>
+            <pre
+              class="code-block"
+            ><code><span class="hl-attr">font-size</span>: <span class="hl-string">12px</span>;
+<span class="hl-attr">font-size</span>: <span class="hl-string">14px</span>;
+<span class="hl-attr">font-size</span>: <span class="hl-string">16px</span>;
+<span class="hl-attr">font-size</span>: <span class="hl-string">18px</span>;</code></pre>
+            <h2>6.3. Icons</h2>
+            <h3>Font Awesome</h3>
+            <ul>
+              <li>
+                <b>Website</b>:
+                <a
+                  href="https://fontawesome.com/search?o=r&m=free"
+                  target="_blank"
+                  >fontawesome.com</a
+                >
+              </li>
+              <li>
+                <b>Link CDN</b>:
+                <a
+                  href="https://cdnjs.com/libraries/font-awesome"
+                  target="_blank"
+                  >cdnjs.com/libraries/font-awesome</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">
+      <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+    </div>
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">
+        ← Trước
+      </button>
+      <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+        Tiếp →
+      </button>
+    </div>
+    <script>
+      let currentSlideIndex = 0;
+      let slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+      function updateSlideDisplay() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove("active");
+          if (index === currentSlideIndex) {
+            slide.classList.add("active");
+          }
+        });
+        document.getElementById("currentSlide").textContent =
+          currentSlideIndex + 1;
+        document.getElementById("totalSlides").textContent = totalSlides;
+        const progressBar = document.getElementById("progressBar");
+        const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
+        progressBar.style.width = progress + "%";
+        document.getElementById("prevBtn").disabled = currentSlideIndex === 0;
+        document.getElementById("nextBtn").disabled =
+          currentSlideIndex === totalSlides - 1;
+      }
+      function changeSlide(direction) {
+        const newIndex = currentSlideIndex + direction;
+        if (newIndex >= 0 && newIndex < totalSlides) {
+          currentSlideIndex = newIndex;
+          updateSlideDisplay();
+        }
+      }
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") changeSlide(-1);
+        if (e.key === "ArrowRight") changeSlide(1);
+        if (e.key === "Home") {
+          currentSlideIndex = 0;
+          updateSlideDisplay();
+        }
+        if (e.key === "End") {
+          currentSlideIndex = totalSlides - 1;
+          updateSlideDisplay();
+        }
+      });
+      updateSlideDisplay();
+    </script>
+  </body>
+</html>
