@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trường THPT Lê Văn Tám - Bài tập CSS</title>
+    <title>Học Viện Lập Trình DACA</title>
     <style>
+        /* Reset CSS cơ bản */
         * {
             margin: 0;
             padding: 0;
@@ -12,394 +13,406 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            color: #333;
         }
 
         /* Header */
         .header {
-            position: fixed;
+            background-color: #2196F3;
+            color: white;
+            padding: 20px 0;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            z-index: 1000;
-            padding: 15px 0;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: block;
+            z-index: 100;
         }
 
         .header h1 {
-            display: inline-block;
-            color: #2c3e50;
-            font-size: 24px;
-            margin-right: 50px;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
 
         .nav-menu {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav-menu ul {
             list-style-type: none;
             display: inline-block;
-            margin: 0;
-            padding: 0;
         }
 
         .nav-menu li {
             display: inline-block;
-            margin-right: 30px;
+            margin: 0 20px;
         }
 
         .nav-menu a {
-            color: #2c3e50;
+            color: white;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
         .nav-menu a:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
-        .nav-menu a:active {
-            transform: translateY(0);
-        }
-
-        /* Container chính */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px 20px;
-        }
-
-        /* Hero section */
-        .hero {
-            background: white;
-            border-radius: 20px;
-            padding: 60px 40px;
+        /* Banner */
+        .banner {
+            background-color: #f8f9fa;
+            padding: 60px 20px;
             text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        .banner::before {
             content: "";
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(52,152,219,0.1) 0%, transparent 70%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            opacity: 0.1;
             z-index: 1;
         }
 
-        .hero-content {
+        .banner-content {
             position: relative;
             z-index: 2;
         }
 
-        .hero h2 {
-            color: #2c3e50;
-            font-size: 2.5em;
+        .banner h2 {
+            font-size: 2.2em;
             margin-bottom: 20px;
+            color: #2196F3;
         }
 
-        .hero p {
-            color: #7f8c8d;
+        .banner p {
             font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
         }
 
-        /* Card sections */
-        .card {
-            background: white;
-            border-radius: 15px;
+        .cta-button {
+            display: inline-block;
+            background-color: #FF9800;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #F57C00;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Courses Section */
+        .courses-section {
+            padding: 50px 0;
+            background-color: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 40px;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #4CAF50;
+        }
+
+        /* Course Cards */
+        .course-grid {
+            display: block;
+            margin-bottom: 40px;
+        }
+
+        .course-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border-left: 5px solid #4CAF50;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .card:hover {
+        .course-card:hover {
+            background-color: #e8f5e8;
             transform: translateY(-5px);
         }
 
-        .card h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        /* Bảng thông tin */
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .info-table th {
-            background-color: #cc6600;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #999;
-            font-weight: bold;
-        }
-
-        .info-table td {
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #ddd;
-            background: #f8f9fa;
-        }
-
-        .info-table tr:hover {
-            background: #e3f2fd;
-        }
-
-        .info-table tr:hover td {
-            background: #e3f2fd;
-        }
-
-        /* Danh sách */
-        .feature-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .feature-list li {
-            background: #f8f9fa;
+        .course-card h3 {
+            color: #2196F3;
             margin-bottom: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #3498db;
-            transition: all 0.3s ease;
+            font-size: 1.5em;
         }
 
-        .feature-list li:hover {
-            background: #e8f5e8;
-            transform: translateX(10px);
+        .course-info {
+            margin-bottom: 15px;
         }
 
-        .feature-list li:first-child {
-            border-left-color: #e74c3c;
+        .course-info span {
+            display: inline-block;
+            background-color: #2196F3;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-right: 10px;
+            margin-bottom: 5px;
         }
 
-        .feature-list li:last-child {
-            border-left-color: #f39c12;
+        .course-card p {
+            color: #666;
+            margin-bottom: 20px;
         }
 
-        /* Contact list */
-        .contact-list {
-            list-style-type: disc;
-            list-style-position: inside;
-            color: #3498db;
+        .course-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #FF9800;
         }
 
-        .contact-list li {
-            padding: 10px 0;
-            color: #2c3e50;
-            border-bottom: 1px solid #ecf0f1;
+        /* Statistics Section */
+        .stats-section {
+            background-color: #2196F3;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
         }
 
-        .contact-list li:last-child {
-            border-bottom: none;
-        }
-
-        .contact-list li:hover {
-            background: #f8f9fa;
-            padding-left: 10px;
-            border-radius: 5px;
-        }
-
-        /* Grid layout cho achievements */
-        .achievements {
+        .stats-grid {
             display: block;
         }
 
-        .achievement-item {
+        .stat-item {
             display: inline-block;
-            width: 30%;
-            margin: 1.5%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 20px;
-            border-radius: 15px;
-            text-align: center;
+            margin: 20px;
             vertical-align: top;
-            transition: all 0.3s ease;
+            width: 200px;
         }
 
-        .achievement-item:hover {
-            transform: scale(1.05);
-        }
-
-        .achievement-item h4 {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-
-        .achievement-item .number {
-            font-size: 2.5em;
+        .stat-number {
+            font-size: 3em;
             font-weight: bold;
             display: block;
             margin-bottom: 10px;
         }
 
-        /* News section với overflow */
-        .news-section {
-            background: #f8f9fa;
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* Students Table Section */
+        .students-section {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+            background-color: white;
             border-radius: 10px;
             padding: 20px;
-            margin: 20px 0;
         }
 
-        .news-container {
-            height: 200px;
-            overflow: auto;
-            padding: 10px;
-            background: white;
-            border-radius: 5px;
+        .student-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
         }
 
-        .news-item {
-            padding: 15px;
-            border-bottom: 1px solid #ecf0f1;
-            transition: background 0.3s ease;
+        .student-table th,
+        .student-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
         }
 
-        .news-item:hover {
-            background: #f8f9fa;
-        }
-
-        .news-item:last-child {
-            border-bottom: none;
-        }
-
-        .news-date {
-            color: #3498db;
+        .student-table th {
+            background-color: #4CAF50;
+            color: white;
             font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+
+        .student-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .student-table tr:hover {
+            background-color: #e8f5e8;
+            cursor: pointer;
+        }
+
+        .status-active {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
             font-size: 0.9em;
         }
 
-        /* Special text với pseudo-elements */
-        .welcome-text {
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            border: 2px solid #ecf0f1;
-        }
-
-        .welcome-text::first-letter {
-            font-size: 4em;
-            color: #3498db;
-            float: left;
-            line-height: 1;
-            margin-right: 10px;
-            margin-top: 5px;
-        }
-
-        .welcome-text::selection {
-            background: #3498db;
+        .status-pending {
+            background-color: #FF9800;
             color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
         }
 
-        /* Testimonials với pseudo-elements */
-        .testimonial {
-            background: #f8f9fa;
+        .status-completed {
+            background-color: #2196F3;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        /* Features List */
+        .features-section {
+            padding: 50px 0;
+            background-color: white;
+        }
+
+        .features-list {
+            list-style-type: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-list li {
+            background-color: #f9f9f9;
+            margin-bottom: 15px;
             padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
+            border-left: 4px solid #4CAF50;
             position: relative;
-            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
         }
 
-        .testimonial::before {
-            content: "💬";
-            font-size: 2em;
+        .features-list li::before {
+            content: "✓";
             position: absolute;
-            top: -10px;
-            left: -10px;
-            background: white;
-            padding: 5px;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #4CAF50;
+            color: white;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-        }
-
-        .testimonial p {
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        .testimonial .author {
+            display: inline-block;
+            text-align: center;
+            line-height: 30px;
             font-weight: bold;
-            color: #2c3e50;
-            text-align: right;
         }
 
-        /* Opacity effects */
-        .highlight-box {
-            background: rgba(52, 152, 219, 0.1);
-            border: 2px solid #3498db;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
-        .highlight-box:hover {
-            opacity: 1;
+        .features-list li:hover {
+            background-color: #e8f5e8;
+            padding-left: 30px;
         }
 
         /* Footer */
         .footer {
-            background: rgba(44, 62, 80, 0.9);
+            background-color: #333;
             color: white;
+            padding: 30px 0;
             text-align: center;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 50px;
-            backdrop-filter: blur(10px);
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #FF9800;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 60px;
+            font-size: 1.5em;
+            text-decoration: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .fab:hover {
+            background-color: #F57C00;
+            transform: scale(1.1);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .achievement-item {
-                width: 100%;
-                margin: 10px 0;
-            }
-            
+        @media screen and (max-width: 768px) {
             .header h1 {
-                display: block;
-                margin-bottom: 10px;
-                margin-right: 0;
-            }
-            
-            .nav-menu {
-                display: block;
+                font-size: 1.8em;
             }
             
             .nav-menu li {
                 display: block;
                 margin: 5px 0;
+            }
+            
+            .banner h2 {
+                font-size: 1.5em;
+            }
+            
+            .stat-item {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .table-responsive {
+                font-size: 14px;
+            }
+            
+            .course-card {
+                padding: 20px;
             }
         }
     </style>
@@ -407,183 +420,191 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-content">
-            <h1>🏫 Trường THPT Lê Văn Tám</h1>
-            <ul class="nav-menu">
-                <li><a href="#home">Trang chủ</a></li>
-                <li><a href="#about">Giới thiệu</a></li>
-                <li><a href="#news">Tin tức</a></li>
-                <li><a href="#contact">Liên hệ</a></li>
-            </ul>
+        <div class="container">
+            <h1>🎓 Học Viện Lập Trình DACA</h1>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="#courses">Khóa học</a></li>
+                    <li><a href="#students">Học viên</a></li>
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- Container chính -->
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Chào mừng đến với Trường THPT Lê Văn Tám</h2>
-                <p>Ngôi trường với truyền thống 50 năm đào tạo và phát triển</p>
+    <!-- Banner -->
+    <section class="banner" id="home">
+        <div class="container">
+            <div class="banner-content">
+                <h2>Khởi đầu sự nghiệp lập trình của bạn</h2>
+                <p>Tham gia các khóa học chất lượng cao với đội ngũ giảng viên giàu kinh nghiệm</p>
+                <a href="#courses" class="cta-button">Khám phá khóa học</a>
             </div>
-        </section>
-
-        <!-- Giới thiệu -->
-        <section class="card">
-            <div class="welcome-text">
-                Trường Trung học Phổ thông Lê Văn Tám được thành lập năm 1974, là một trong những ngôi trường có truyền thống lâu đời tại thành phố Hồ Chí Minh. Với đội ngũ giáo viên giàu kinh nghiệm và cơ sở vật chất hiện đại, nhà trường luôn nỗ lực tạo ra môi trường học tập tốt nhất cho học sinh.
-            </div>
-        </section>
-
-        <!-- Thông tin chung -->
-        <section class="card">
-            <h3>📋 Thông tin chung</h3>
-            <table class="info-table">
-                <tr>
-                    <th>Thông tin</th>
-                    <th>Chi tiết</th>
-                    <th>Ghi chú</th>
-                </tr>
-                <tr>
-                    <td>Tổng số học sinh</td>
-                    <td>1,250 học sinh</td>
-                    <td>Khối 10-12</td>
-                </tr>
-                <tr>
-                    <td>Số lớp học</td>
-                    <td>36 lớp</td>
-                    <td>12 lớp/khối</td>
-                </tr>
-                <tr>
-                    <td>Giáo viên</td>
-                    <td>85 giáo viên</td>
-                    <td>Trình độ đại học trở lên</td>
-                </tr>
-                <tr>
-                    <td>Diện tích</td>
-                    <td>15,000 m²</td>
-                    <td>Bao gồm sân chơi</td>
-                </tr>
-                <tr>
-                    <td>Thành lập</td>
-                    <td>Năm 1974</td>
-                    <td>50 năm truyền thống</td>
-                </tr>
-            </table>
-        </section>
-
-        <!-- Thành tựu -->
-        <section class="card">
-            <h3>🏆 Thành tựu nổi bật</h3>
-            <div class="achievements">
-                <div class="achievement-item">
-                    <span class="number">98%</span>
-                    <h4>Tỷ lệ tốt nghiệp</h4>
-                    <p>Học sinh tốt nghiệp THPT</p>
-                </div>
-                <div class="achievement-item">
-                    <span class="number">85%</span>
-                    <h4>Đậu đại học</h4>
-                    <p>Học sinh đậu các trường đại học</p>
-                </div>
-                <div class="achievement-item">
-                    <span class="number">150+</span>
-                    <h4>Giải thưởng</h4>
-                    <p>Các giải trong học tập và thể thao</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cơ sở vật chất -->
-        <section class="card">
-            <h3>🏗️ Cơ sở vật chất</h3>
-            <ul class="feature-list">
-                <li><strong>Phòng học hiện đại:</strong> 36 phòng học được trang bị máy chiếu, điều hòa</li>
-                <li><strong>Phòng thí nghiệm:</strong> 6 phòng thí nghiệm Lý, Hóa, Sinh đầy đủ thiết bị</li>
-                <li><strong>Thư viện:</strong> Hơn 10,000 đầu sách và tài liệu tham khảo</li>
-                <li><strong>Sân thể thao:</strong> Sân bóng đá, bóng chuyền, bóng rổ chuẩn</li>
-                <li><strong>Phòng máy tính:</strong> 60 máy tính kết nối internet tốc độ cao</li>
-                <li><strong>Căng tin:</strong> Phục vụ đầy đủ các bữa ăn dinh dưỡng</li>
-            </ul>
-        </section>
-
-        <!-- Tin tức -->
-        <section class="card">
-            <h3>📰 Tin tức mới nhất</h3>
-            <div class="news-section">
-                <div class="news-container">
-                    <div class="news-item">
-                        <div class="news-date">15/12/2024</div>
-                        <p><strong>Lễ khai giảng năm học 2024-2025</strong> - Trường tổ chức lễ khai giảng với sự tham dự của 1,250 học sinh và phụ huynh</p>
-                    </div>
-                    <div class="news-item">
-                        <div class="news-date">10/12/2024</div>
-                        <p><strong>Học sinh lớp 12A1 đạt giải Nhất</strong> - Cuộc thi Khoa học Kỹ thuật cấp thành phố</p>
-                    </div>
-                    <div class="news-item">
-                        <div class="news-date">05/12/2024</div>
-                        <p><strong>Khánh thành phòng thí nghiệm mới</strong> - Phòng thí nghiệm Hóa học với thiết bị hiện đại</p>
-                    </div>
-                    <div class="news-item">
-                        <div class="news-date">01/12/2024</div>
-                        <p><strong>Hội thao học sinh khối 10</strong> - Tăng cường tinh thần đoàn kết và rèn luyện sức khỏe</p>
-                    </div>
-                    <div class="news-item">
-                        <div class="news-date">28/11/2024</div>
-                        <p><strong>Chương trình từ thiện</strong> - Ủng hộ học sinh vùng khó khăn với số tiền 50 triệu đồng</p>
-                    </div>
-                    <div class="news-item">
-                        <div class="news-date">25/11/2024</div>
-                        <p><strong>Thi Olympic Toán học</strong> - 3 học sinh đạt giải trong kỳ thi Olympic cấp tỉnh</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Thông báo đặc biệt -->
-        <div class="highlight-box">
-            <h4>🎯 Thông báo quan trọng</h4>
-            <p>Nhà trường thông báo lịch thi học kỳ I năm học 2024-2025 sẽ diễn ra từ ngày 15/01 đến 25/01/2025. Học sinh cần chuẩn bị kỹ càng và liên hệ giáo viên chủ nhiệm để được hướng dẫn chi tiết.</p>
         </div>
+    </section>
 
-        <!-- Cảm nhận học sinh -->
-        <section class="card">
-            <h3>💭 Học sinh nói gì về trường</h3>
+    <!-- Courses Section -->
+    <section class="courses-section" id="courses">
+        <div class="container">
+            <h2 class="section-title">Khóa học nổi bật</h2>
             
-            <div class="testimonial">
-                <p>"Tôi rất tự hào khi được học tại trường THPT Lê Văn Tám. Các thầy cô rất tận tâm và môi trường học tập thực sự tuyệt vời."</p>
-                <div class="author">- Nguyễn Minh Anh, lớp 12A1</div>
-            </div>
+            <div class="course-grid">
+                <div class="course-card">
+                    <h3>Front-end Development</h3>
+                    <div class="course-info">
+                        <span>3 tháng</span>
+                        <span>Cơ bản</span>
+                        <span>Online/Offline</span>
+                    </div>
+                    <p>Học HTML, CSS, JavaScript từ cơ bản đến nâng cao. Xây dựng các website responsive và tương tác.</p>
+                    <div class="course-price">5.000.000 VNĐ</div>
+                </div>
 
-            <div class="testimonial">
-                <p>"Trường có nhiều hoạt động ngoại khóa bổ ích, giúp chúng em phát triển toàn diện cả về học tập và kỹ năng sống."</p>
-                <div class="author">- Trần Văn Bình, lớp 11B2</div>
-            </div>
+                <div class="course-card">
+                    <h3>React.js Advanced</h3>
+                    <div class="course-info">
+                        <span>2 tháng</span>
+                        <span>Nâng cao</span>
+                        <span>Online</span>
+                    </div>
+                    <p>Chuyên sâu về React.js, Redux, Context API. Xây dựng Single Page Application hiện đại.</p>
+                    <div class="course-price">7.000.000 VNĐ</div>
+                </div>
 
-            <div class="testimonial">
-                <p>"Cơ sở vật chất hiện đại, thư viện phong phú, là nơi lý tưởng để chúng em học tập và nghiên cứu."</p>
-                <div class="author">- Lê Thị Cúc, lớp 10C3</div>
+                <div class="course-card">
+                    <h3>Full-stack Development</h3>
+                    <div class="course-info">
+                        <span>6 tháng</span>
+                        <span>Chuyên nghiệp</span>
+                        <span>Offline</span>
+                    </div>
+                    <p>Trở thành Full-stack Developer với Node.js, Express, MongoDB, React và nhiều công nghệ khác.</p>
+                    <div class="course-price">12.000.000 VNĐ</div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Thông tin liên hệ -->
-        <section class="card">
-            <h3>📞 Thông tin liên hệ</h3>
-            <ul class="contact-list">
-                <li>Địa chỉ: 145 Pasteur, Phường Võ Thị Sáu, Quận 3, TP.HCM</li>
-                <li>Điện thoại: 028-3829-7456</li>
-                <li>Email: thptlevantam@edu.hcm.vn</li>
-                <li>Website: www.thptlevantam.edu.vn</li>
-                <li>Fanpage: Trường THPT Lê Văn Tám</li>
-                <li>Giờ làm việc: 7:00 - 17:00 (Thứ 2 - Thứ 6)</li>
+    <!-- Statistics -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Thành tích của chúng tôi</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Học viên tốt nghiệp</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Khóa học</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Tỷ lệ có việc làm</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.8/5</span>
+                    <span class="stat-label">Đánh giá học viên</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Students Table -->
+    <section class="students-section" id="students">
+        <div class="container">
+            <h2 class="section-title">Danh sách học viên tiêu biểu</h2>
+            
+            <div class="table-responsive">
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>Họ tên</th>
+                            <th>Khóa học</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Tiến độ</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nguyễn Văn An</td>
+                            <td>Front-end Development</td>
+                            <td>nguyenvana@email.com</td>
+                            <td>0901234567</td>
+                            <td>85%</td>
+                            <td><span class="status-active">Đang học</span></td>
+                        </tr>
+                        <tr>
+                            <td>Trần Thị Bình</td>
+                            <td>React.js Advanced</td>
+                            <td>tranthib@email.com</td>
+                            <td>0902345678</td>
+                            <td>100%</td>
+                            <td><span class="status-completed">Hoàn thành</span></td>
+                        </tr>
+                        <tr>
+                            <td>Lê Văn Cường</td>
+                            <td>Full-stack Development</td>
+                            <td>levanc@email.com</td>
+                            <td>0903456789</td>
+                            <td>60%</td>
+                            <td><span class="status-active">Đang học</span></td>
+                        </tr>
+                        <tr>
+                            <td>Phạm Thị Dung</td>
+                            <td>Front-end Development</td>
+                            <td>phamthid@email.com</td>
+                            <td>0904567890</td>
+                            <td>0%</td>
+                            <td><span class="status-pending">Chờ bắt đầu</span></td>
+                        </tr>
+                        <tr>
+                            <td>Hoàng Văn Em</td>
+                            <td>React.js Advanced</td>
+                            <td>hoangvane@email.com</td>
+                            <td>0905678901</td>
+                            <td>100%</td>
+                            <td><span class="status-completed">Hoàn thành</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section" id="about">
+        <div class="container">
+            <h2 class="section-title">Tại sao chọn DACA?</h2>
+            
+            <ul class="features-list">
+                <li>Giảng viên giàu kinh nghiệm với hơn 10 năm trong ngành</li>
+                <li>Chương trình học cập nhật theo xu hướng công nghệ mới nhất</li>
+                <li>Hỗ trợ tìm việc làm sau khi tốt nghiệp với mức lương hấp dẫn</li>
+                <li>Học phí hợp lý, có thể trả góp 0% lãi suất</li>
+                <li>Môi trường học tập chuyên nghiệp với trang thiết bị hiện đại</li>
+                <li>Cộng đồng alumni mạnh mẽ hỗ trợ networking</li>
+                <li>Chứng chỉ được công nhận bởi các doanh nghiệp hàng đầu</li>
             </ul>
-        </section>
-    </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 Trường THPT Lê Văn Tám. Bài tập thực hành CSS cơ bản.</p>
-        <p>Đào tạo thế hệ trẻ tài năng cho tương lai đất nước</p>
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p>&copy; 2024 Học Viện Lập Trình DACA. Tất cả quyền được bảo lưu.</p>
+            <p>Email: <a href="mailto:contact@daca.vn">contact@daca.vn</a> | 
+               Hotline: <a href="tel:0123456789">0123 456 789</a></p>
+            <p>Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM</p>
+        </div>
     </footer>
+
+    <!-- Floating Action Button -->
+    <a href="#home" class="fab">↑</a>
+
 </body>
 </html>
