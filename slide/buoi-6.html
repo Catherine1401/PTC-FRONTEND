@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buổi 6: Học CSS, CSS3 nâng cao</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg,
+          #e3f2fd 0%,
+          #bbdefb 50%,
+          #90caf9 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 20%,
+          rgba(33, 150, 243, 0.1) 0%,
+          transparent 50%),
+        radial-gradient(circle at 80% 80%,
+          rgba(13, 71, 161, 0.1) 0%,
+          transparent 50%);
+      pointer-events: none;
+    }
+
+    .slide-container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(33, 150, 243, 0.2);
+      width: 100%;
+      max-width: 1000px;
+      height: 700px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(33, 150, 243, 0.1);
+    }
+
+    .slide {
+      display: none;
+      height: 100%;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .intro-slide {
+      background: linear-gradient(45deg, #0d47a1, #1976d2, #42a5f5, #64b5f6);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      color: white;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .intro-slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 20%,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 50%),
+        radial-gradient(circle at 80% 80%,
+          rgba(255, 255, 255, 0.05) 0%,
+          transparent 50%),
+        radial-gradient(circle at 40% 60%,
+          rgba(255, 255, 255, 0.08) 0%,
+          transparent 50%);
+      animation: floatingOrbs 12s ease-in-out infinite;
+    }
+
+    @keyframes floatingOrbs {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      33% {
+        transform: translateY(-20px) rotate(120deg);
+      }
+
+      66% {
+        transform: translateY(10px) rotate(240deg);
+      }
+    }
+
+    .intro-slide::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%);
+      animation: shimmer 3s ease-in-out infinite;
+      transform: translateX(-100%);
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .intro-content {
+      z-index: 10;
+      position: relative;
+      animation: contentFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes contentFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .club-name {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(33, 150, 243, 0.8);
+      background: linear-gradient(45deg, #fff, #e3f2fd, #fff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textGlow 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes textGlow {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+        filter: brightness(1);
+      }
+
+      50% {
+        background-position: 100% 50%;
+        filter: brightness(1.2);
+      }
+    }
+
+    .club-name::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent);
+      animation: sparkle 2s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes sparkle {
+      0% {
+        transform: translateX(-100%) rotate(30deg);
+      }
+
+      100% {
+        transform: translateX(100%) rotate(30deg);
+      }
+    }
+
+    .course-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      color: #e3f2fd;
+      text-shadow: 0 0 15px rgba(227, 242, 253, 0.8);
+      animation: titlePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes titlePulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        text-shadow: 0 0 15px rgba(227, 242, 253, 0.8);
+      }
+
+      50% {
+        transform: scale(1.05);
+        text-shadow: 0 0 25px rgba(227, 242, 253, 1);
+      }
+    }
+
+    .lesson-info {
+      font-size: 1.8rem;
+      font-weight: 500;
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.1));
+      padding: 25px 50px;
+      border-radius: 25px;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      animation: cardFloat 4s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes cardFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotateX(0deg);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      50% {
+        transform: translateY(-8px) rotateX(2deg);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .lesson-info::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent);
+      animation: lessonShine 3s ease-in-out infinite;
+    }
+
+    @keyframes lessonShine {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: particleFloat 8s linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) translateX(0px);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100px) translateX(100px);
+        opacity: 0;
+      }
+    }
+
+    .particle:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 6s;
+    }
+
+    .particle:nth-child(2) {
+      left: 20%;
+      animation-delay: 1s;
+      animation-duration: 8s;
+    }
+
+    .particle:nth-child(3) {
+      left: 30%;
+      animation-delay: 2s;
+      animation-duration: 7s;
+    }
+
+    .particle:nth-child(4) {
+      left: 40%;
+      animation-delay: 3s;
+      animation-duration: 9s;
+    }
+
+    .particle:nth-child(5) {
+      left: 50%;
+      animation-delay: 4s;
+      animation-duration: 6s;
+    }
+
+    .particle:nth-child(6) {
+      left: 60%;
+      animation-delay: 5s;
+      animation-duration: 8s;
+    }
+
+    .particle:nth-child(7) {
+      left: 70%;
+      animation-delay: 6s;
+      animation-duration: 7s;
+    }
+
+    .particle:nth-child(8) {
+      left: 80%;
+      animation-delay: 7s;
+      animation-duration: 9s;
+    }
+
+    .particle:nth-child(9) {
+      left: 90%;
+      animation-delay: 8s;
+      animation-duration: 6s;
+    }
+
+    .particle:nth-child(10) {
+      left: 95%;
+      animation-delay: 9s;
+      animation-duration: 8s;
+    }
+
+    .overview-slide {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+    }
+
+    .overview-header {
+      background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .overview-header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .overview-content {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .overview-list {
+      list-style: none;
+      counter-reset: item;
+      max-width: 100%;
+    }
+
+    .overview-list li {
+      counter-increment: item;
+      background: white;
+      margin-bottom: 15px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.1);
+      border-left: 5px solid #2196f3;
+      transition: all 0.3s ease;
+      position: relative;
+      margin-left: 20px;
+    }
+
+    .overview-list li:hover {
+      transform: translateX(10px);
+      box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2);
+    }
+
+    .overview-list li::before {
+      content: counter(item);
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #2196f3;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .overview-list li h3 {
+      color: #1976d2;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .overview-list li p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .content-slide {
+      background: #f8f9fa;
+    }
+
+    .content-header {
+      background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+      color: white;
+      padding: 25px 40px;
+      text-align: center;
+      position: relative;
+      border-bottom: 3px solid #0d47a1;
+    }
+
+    .content-header::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 6px;
+      background: #ffeb3b;
+      border-radius: 3px;
+    }
+
+    .content-header h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-body {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px rgba(33, 150, 243, 0.08);
+      border: 1px solid rgba(33, 150, 243, 0.1);
+    }
+
+    .content-section h2 {
+      color: #1976d2;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e3f2fd;
+      padding-bottom: 10px;
+    }
+
+    .content-section h3 {
+      color: #1976d2;
+      font-size: 1.4rem;
+      margin: 20px 0 15px 0;
+    }
+
+    .content-section h4 {
+      color: #1976d2;
+      font-size: 1.2rem;
+      margin: 15px 0 10px 0;
+    }
+
+    .content-section p {
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+    }
+
+    .content-section ul,
+    .content-section ol {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+
+    .content-section li {
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    pre.code-block {
+      background: #263238;
+      color: #eceff1;
+      padding: 24px 32px 24px 40px;
+      border-radius: 12px;
+      font-family: "Fira Mono", "Courier New", monospace;
+      font-size: 1rem;
+      margin: 28px 0;
+      overflow-x: auto;
+      border-left: 6px solid #ff5722;
+      position: relative;
+      box-shadow: 0 2px 12px rgba(33, 150, 243, 0.07);
+      tab-size: 2;
+      white-space: pre;
+    }
+
+    pre.code-block::before {
+      content: "CODE";
+      position: absolute;
+      top: 8px;
+      right: 18px;
+      background: #ff5722;
+      color: white;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      opacity: 0.85;
+    }
+
+    .code-block span.tag,
+    .code-block span.attribute,
+    .code-block span.string,
+    .code-block span.comment {
+      display: inline-block;
+      padding-left: 18px;
+      text-indent: 0;
+    }
+
+    .code-block span.tag {
+      color: #ff9800;
+    }
+
+    .code-block span.attribute {
+      color: #2196f3;
+    }
+
+    .code-block span.string {
+      color: #4caf50;
+    }
+
+    .code-block span.comment {
+      color: #4caf50;
+      font-style: italic;
+    }
+
+    .code-block br {
+      line-height: 2.1;
+    }
+
+    .code-block span:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .image-placeholder {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border: 2px dashed #2196f3;
+      border-radius: 10px;
+      padding: 40px;
+      text-align: center;
+      color: #1976d2;
+      margin: 20px 0;
+      font-style: italic;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #fff3e0 0%, #ffe0b2 100%);
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-weight: 600;
+      color: #e65100;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+    }
+
+    .nav-btn:disabled {
+      background: #bdbdbd;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .slide-counter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+      z-index: 100;
+    }
+
+    .progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #2196f3 0%, #21cbf3 100%);
+      transition: width 0.3s ease;
+      border-radius: 0 0 2px 0;
+    }
+
+    .content-section table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(33, 150, 243, 0.07);
+      margin: 20px 0;
+    }
+
+    .content-section th,
+    .content-section td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #e3f2fd;
+      text-align: left;
+    }
+
+    .content-section th {
+      background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+      color: #fff;
+      font-weight: 600;
+      border-bottom: 2px solid #1976d2;
+    }
+
+    .content-section tr:last-child td {
+      border-bottom: none;
+    }
+
+    .content-section tbody tr:hover {
+      background: #e3f2fd;
+      transition: background 0.2s;
+    }
+
+    pre.code-block code {
+      color: #eceff1;
+      font-family: "Fira Mono", "Courier New", monospace;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    pre.code-block code .hl-tag {
+      color: #ff9800;
+    }
+
+    pre.code-block code .hl-attr {
+      color: #42a5f5;
+    }
+
+    pre.code-block code .hl-string {
+      color: #4caf50;
+    }
+
+    pre.code-block code .hl-comment {
+      color: #b0bec5;
+      font-style: italic;
+    }
+
+    /* Additional syntax highlighting colors */
+    pre.code-block code .hl-keyword {
+      color: #ff5722;
+      font-weight: bold;
+    }
+
+    pre.code-block code .hl-property {
+      color: #2196f3;
+    }
+
+    pre.code-block code .hl-value {
+      color: #4caf50;
+    }
+
+    pre.code-block code .hl-number {
+      color: #ff9800;
+    }
+
+    pre.code-block code .hl-function {
+      color: #e91e63;
+    }
+
+    pre.code-block code .hl-selector {
+      color: #9c27b0;
+    }
+
+    pre.code-block code .hl-punctuation {
+      color: #bdbdbd;
+    }
+
+    pre.code-block code .hl-operator {
+      color: #ff5722;
+    }
+
+    pre.code-block code .hl-variable {
+      color: #2196f3;
+    }
+
+    pre.code-block code .hl-important {
+      color: #f44336;
+      font-weight: bold;
+    }
+
+    pre.code-block code .hl-media {
+      color: #ff9800;
+    }
+
+    pre.code-block code .hl-feature {
+      color: #4caf50;
+    }
+
+    @media (max-width: 768px) {
+      .slide-container {
+        height: 90vh;
+      }
+
+      .club-name {
+        font-size: 2rem;
+      }
+
+      .course-title {
+        font-size: 1.5rem;
+      }
+
+      .lesson-info {
+        font-size: 1.3rem;
+        padding: 15px 25px;
+      }
+
+      .content-body {
+        padding: 20px;
+      }
+
+      .slide-counter {
+        bottom: 15px;
+        right: 15px;
+        padding: 8px 15px;
+        font-size: 0.9rem;
+      }
+
+      .content-section table,
+      .content-section thead,
+      .content-section tbody,
+      .content-section th,
+      .content-section td,
+      .content-section tr {
+        display: block;
+      }
+
+      .content-section th,
+      .content-section td {
+        padding: 10px 8px;
+      }
+
+      .content-section th {
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide-container">
+    <div class="progress-bar" id="progressBar"></div>
+    <!-- Slide 1: Giới thiệu -->
+    <div class="slide intro-slide active">
+      <div class="intro-content">
+        <h1 class="club-name">Phenikaa Techlearn Club</h1>
+        <h2 class="course-title">Khóa học HTML, CSS cơ bản</h2>
+        <div class="lesson-info">
+          <span>Buổi 6: Học CSS, CSS3 nâng cao</span>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2: Tóm tắt nội dung -->
+    <div class="slide overview-slide">
+      <div class="overview-header">
+        <h1>Tóm tắt nội dung</h1>
+      </div>
+      <div class="overview-content">
+        <ul class="overview-list">
+          <li>
+            <h3>Float và Clear</h3>
+          </li>
+          <li>
+            <h3>Attribute selectors (Bộ chọn thuộc tính)</h3>
+          </li>
+          <li>
+            <h3>Units (Đơn vị)</h3>
+          </li>
+          <li>
+            <h3>Specificity và !important</h3>
+          </li>
+          <li>
+            <h3>Math Functions (Hàm toán học)</h3>
+          </li>
+          <li>
+            <h3>CSS function attr()</h3>
+          </li>
+          <li>
+            <h3>Variables (Biến)</h3>
+          </li>
+          <li>
+            <h3>Box Sizing (Kích thước hộp)</h3>
+          </li>
+          <li>
+            <h3>Khái niệm Responsive</h3>
+          </li>
+          <li>
+            <h3>Media Queries</h3>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Slide: 01. Float và Clear -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>01. Float và Clear</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <h2>1.1. Float</h2>
+          <p><strong>Thuộc tính float</strong> được sử dụng để chuyển một phần tử sang góc trái hoặc góc bên phải của
+            không gian bao quanh nó.</p>
+          <h3>Các giá trị của Float:</h3>
+          <ul>
+            <li><code>float: left;</code> - Phần tử nằm phía bên trái</li>
+            <li><code>float: right;</code> - Phần tử nằm phía bên phải</li>
+            <li><code>float: none;</code> - Phần tử nằm tại chính vị trí của nó (Mặc định)</li>
+          </ul>
+
+          <h2>1.2. Clear</h2>
+          <p><strong>Thuộc tính Clear</strong> là một thuộc tính ngược lại hoàn toàn với Float.</p>
+          <p><strong>Mục đích:</strong> Ngăn chặn phần tử B chiếm vùng không gian của phần tử A (với A là phần tử sử
+            dụng float).</p>
+          <h3>Các giá trị của Clear:</h3>
+          <ul>
+            <li><code>clear: left;</code>
+              <ul>
+                <li>Ngăn chặn phần tử B chiếm chỗ phần tử A, khi phần tử A có sử dụng <code>float: left;</code></li>
+                <li>Không có tác dụng khi phần tử A sử dụng <code>float: right;</code></li>
+              </ul>
+            </li>
+            <li><code>clear: right;</code>
+              <ul>
+                <li>Ngăn chặn phần tử B chiếm chỗ phần tử A, khi phần tử A có sử dụng <code>float: right;</code></li>
+                <li>Không có tác dụng khi phần tử A sử dụng <code>float: left;</code></li>
+              </ul>
+            </li>
+            <li><code>clear: both;</code>
+              <ul>
+                <li>Ngăn chặn sự chiếm vùng không gian cả khi chỉ có một phần tử sử dụng float</li>
+                <li>Sử dụng khi cả 2 phần tử A và B sử dụng float</li>
+              </ul>
+            </li>
+            <li><code>clear: none;</code>
+              <ul>
+                <li>Dạng phục hồi khi thành phần sử dụng thuộc tính clear</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 02. Attribute Selectors -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>02. Attribute Selectors (Bộ chọn thuộc tính)</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <p>Bộ chọn attribute được sử dụng để chọn các phần tử có thuộc tính được chỉ định.</p>
+          <h2>Các kiểu chọn:</h2>
+
+          <h3><code>[attribute]</code></h3>
+          <ul>
+            <li>Chọn tất cả các phần tử có thuộc tính [attribute]</li>
+          </ul>
+
+          <h3><code>[attribute="value"]</code></h3>
+          <ul>
+            <li>Chọn tất cả các phần tử có thuộc tính [attribute] phải chứa giá trị value</li>
+            <li>Chỉ được có giá trị duy nhất là value</li>
+            <li>Giá trị có thể bao gồm nhiều từ</li>
+          </ul>
+
+          <h3><code>[attribute~="value"]</code></h3>
+          <ul>
+            <li>Chọn tất cả các phần tử có thuộc tính [attribute] phải chứa giá trị value</li>
+            <li>value đó phải đứng độc lập, không được viết liền với từ khác</li>
+            <li>value phải là 1 từ khóa duy nhất</li>
+          </ul>
+
+          <h3><code>[attribute|="value"]</code></h3>
+          <ul>
+            <li>Chọn các phần tử có thuộc tính [attribute], giá trị có thể chính xác là giá trị được chỉ định hoặc giá
+              trị được chỉ định theo sau dấu gạch nối (-)</li>
+            <li>Giá trị phải là một từ nguyên vẹn, đơn lẻ như <code>class="top"</code> hoặc theo sau là dấu gạch ngang
+              như <code>class="top-text"</code></li>
+          </ul>
+
+          <h3><code>[attribute^="value"]</code></h3>
+          <ul>
+            <li>Chọn tất cả các phần tử có thuộc tính [attribute] bắt đầu bằng giá trị value</li>
+            <li>Được phép viết liền với các từ khác</li>
+          </ul>
+
+          <h3><code>[attribute$="value"]</code></h3>
+          <ul>
+            <li>Chọn tất cả các phần tử có thuộc tính [attribute] kết thúc bằng giá trị value</li>
+            <li>Giá trị có thể được viết liền với từ khác</li>
+          </ul>
+
+          <h3><code>[attribute*="value"]</code></h3>
+          <ul>
+            <li>Chọn tất cả các phần tử có thuộc tính [attribute] chứa giá trị value</li>
+            <li>Giá trị không nhất thiết phải là một từ nguyên vẹn</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 03. Units -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>03. Units (Đơn vị)</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <h2>Độ dài tuyệt đối</h2>
+          <p>Là loại đơn vị có giá trị cố định và thể hiện chính xác chiều dài kích thước nó hiển thị, không phụ thuộc
+            cũng như không thay đổi bởi bất kỳ tác động bên ngoài nào.</p>
+          <h3>Một số đơn vị:</h3>
+          <ul>
+            <li><code>cm</code> - Centimeter</li>
+            <li><code>mm</code> - Millimeter</li>
+            <li><code>in</code> - Inches (1in = 96px = 2.54cm)</li>
+            <li><code>px</code> - Pixels (1px = 1/96 in) tương ứng với một điểm ảnh trên máy tính</li>
+            <li><code>pt</code> - Points (1pt = 1/72 in)</li>
+            <li><code>pc</code> - Picas (1pc = 12 pt)</li>
+          </ul>
+
+          <h2>Độ dài tương đối</h2>
+          <p>Là đơn vị đo lường được sử dụng trong CSS ở mức tương đối, thường phụ thuộc vào 1 thành phần nào đó thì mới
+            xác định được giá trị của nó.</p>
+          <h3>Một số đơn vị:</h3>
+          <ul>
+            <li><code>%</code> - Giá trị tương đối so với phần tử cha</li>
+            <li><code>rem</code> - Giá trị tương đối với font-size của phần tử gốc (thẻ html)</li>
+            <li><code>em</code> - 1em tương đương với kích cỡ của font-size của phần tử cha có định nghĩa font-size</li>
+            <li><code>vw</code> (viewport width) - 1vw tương đương với 1% của chiều rộng cửa sổ trình duyệt</li>
+            <li><code>vh</code> (viewport height) - 1vh tương đương với 1% của chiều cao cửa sổ trình duyệt</li>
+            <li><code>ex</code> - 1ex tương đương với chiều cao của một chữ x (in thường) của font hiện tại</li>
+            <li><code>ch</code> - 1ch tương đương với chiều rộng của một số 0 theo size hiện tại</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 04. Specificity và !important -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>04. Specificity (Tính đặc hiệu) và !important</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <h2>4.1. Specificity (Tính đặc hiệu)</h2>
+          <p><strong>Tính đặc hiệu</strong> là cách mà trình duyệt quyết định sẽ áp dụng thuộc tính CSS nào với một phần
+            tử khi có nhiều quy tắc CSS cùng trỏ đến phần tử đó.</p>
+          <h3>Sự phân cấp tính đặc hiệu:</h3>
+          <pre
+            class="code-block"><code><span class="hl-selector">Inline</span> <span class="hl-operator">&gt;</span> <span class="hl-selector">ID</span> <span class="hl-operator">&gt;</span> <span class="hl-selector">Classes</span><span class="hl-punctuation">/</span><span class="hl-selector">Attributes</span><span class="hl-punctuation">/</span><span class="hl-selector">Pseudo-classes</span> <span class="hl-operator">&gt;</span> <span class="hl-selector">Elements</span><span class="hl-punctuation">/</span><span class="hl-selector">Pseudo-elements</span></code></pre>
+          <h3>Cách tính toán:</h3>
+          <ul>
+            <li><code><span class="hl-number">1</span><span class="hl-punctuation">-</span><span
+                  class="hl-number">0</span><span class="hl-punctuation">-</span><span class="hl-number">0</span><span
+                  class="hl-punctuation">-</span><span class="hl-number">0</span></code>: Inline styles</li>
+            <li><code><span class="hl-number">0</span><span class="hl-punctuation">-</span><span
+                  class="hl-variable">X</span><span class="hl-punctuation">-</span><span class="hl-number">0</span><span
+                  class="hl-punctuation">-</span><span class="hl-number">0</span></code>: Số lượng ID selector</li>
+            <li><code><span class="hl-number">0</span><span class="hl-punctuation">-</span><span
+                  class="hl-number">0</span><span class="hl-punctuation">-</span><span class="hl-variable">Y</span><span
+                  class="hl-punctuation">-</span><span class="hl-number">0</span></code>: Số lượng Classes, attributes
+              và pseudo-classes</li>
+            <li><code><span class="hl-number">0</span><span class="hl-punctuation">-</span><span
+                  class="hl-number">0</span><span class="hl-punctuation">-</span><span class="hl-number">0</span><span
+                  class="hl-punctuation">-</span><span class="hl-variable">Z</span></code>: Số lượng Elements và
+              pseudo-elements</li>
+          </ul>
+          <h3>Lưu ý:</h3>
+          <ul>
+            <li>CSS theo kiểu Internal và External không có độ ưu tiên</li>
+            <li>Universal selector (*) và combinators selector (+, >, ~) không làm tăng tính đặc hiệu</li>
+          </ul>
+
+          <h2>4.2. !important (Quan trọng)</h2>
+          <p><strong>Important</strong> được sử dụng để thay đổi thứ tự ưu tiên của CSS. Khi một thuộc tính CSS nào đó
+            được gán lệnh Important thì nó sẽ có mức ưu tiên cao nhất.</p>
+          <h3>Ví dụ:</h3>
+          <pre class="code-block"><code><span class="hl-selector">h2</span> <span class="hl-punctuation">{</span>
+  <span class="hl-property">color</span><span class="hl-punctuation">:</span> <span class="hl-value">red</span> <span class="hl-important">!important</span><span class="hl-punctuation">;</span>
+<span class="hl-punctuation">}</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 05. Math Functions -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>05. Math Functions (Hàm toán học)</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <p>Các hàm toán học CSS cho phép các biểu thức toán học được sử dụng làm giá trị thuộc tính.</p>
+          <h2>Các hàm toán học:</h2>
+
+          <h3>Hàm <code>calc()</code></h3>
+          <ul>
+            <li>Thực hiện một phép tính, kết quả sẽ lấy làm giá trị thuộc tính</li>
+            <li>Các toán tử có thể sử dụng: <code><span class="hl-operator">+</span> <span class="hl-operator">-</span>
+                <span class="hl-operator">*</span> <span class="hl-operator">/</span></code></li>
+            <li><strong>Ví dụ:</strong> <code><span class="hl-property">width</span><span
+                  class="hl-punctuation">:</span> <span class="hl-function">calc</span><span
+                  class="hl-punctuation">(</span><span class="hl-number">100</span><span class="hl-operator">%</span>
+                <span class="hl-operator">-</span> <span class="hl-number">100</span><span
+                  class="hl-variable">px</span><span class="hl-punctuation">)</span><span
+                  class="hl-punctuation">;</span></code></li>
+          </ul>
+
+          <h3>Hàm <code>max()</code></h3>
+          <ul>
+            <li>Sử dụng giá trị lớn nhất từ danh sách giá trị được phân tách bằng dấu phẩy</li>
+            <li><strong>Cú pháp:</strong> <code><span class="hl-function">max</span><span
+                  class="hl-punctuation">(</span><span class="hl-variable">value1</span><span
+                  class="hl-punctuation">,</span> <span class="hl-variable">value2</span><span
+                  class="hl-punctuation">,</span> <span class="hl-punctuation">…</span><span
+                  class="hl-punctuation">)</span></code></li>
+            <li><strong>Ví dụ:</strong> <code><span class="hl-property">width</span><span
+                  class="hl-punctuation">:</span> <span class="hl-function">max</span><span
+                  class="hl-punctuation">(</span><span class="hl-number">50</span><span
+                  class="hl-operator">%</span><span class="hl-punctuation">,</span> <span
+                  class="hl-number">300</span><span class="hl-variable">px</span><span
+                  class="hl-punctuation">)</span><span class="hl-punctuation">;</span></code></li>
+          </ul>
+
+          <h3>Hàm <code>min()</code></h3>
+          <ul>
+            <li>Sử dụng giá trị nhỏ nhất từ danh sách giá trị được phân tách bằng dấu phẩy</li>
+            <li><strong>Cú pháp:</strong> <code><span class="hl-function">min</span><span
+                  class="hl-punctuation">(</span><span class="hl-variable">value1</span><span
+                  class="hl-punctuation">,</span> <span class="hl-variable">value2</span><span
+                  class="hl-punctuation">,</span> <span class="hl-punctuation">…</span><span
+                  class="hl-punctuation">)</span></code></li>
+            <li><strong>Ví dụ:</strong> <code><span class="hl-property">width</span><span
+                  class="hl-punctuation">:</span> <span class="hl-function">min</span><span
+                  class="hl-punctuation">(</span><span class="hl-number">50</span><span
+                  class="hl-operator">%</span><span class="hl-punctuation">,</span> <span
+                  class="hl-number">300</span><span class="hl-variable">px</span><span
+                  class="hl-punctuation">)</span><span class="hl-punctuation">;</span></code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 06. CSS Function attr() -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>06. CSS Function attr()</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <p><code>attr()</code> là một hàm CSS trả về giá trị của một thuộc tính.</p>
+          <h3>Ví dụ:</h3>
+          <pre class="code-block"><code><span class="hl-punctuation">[</span><span class="hl-attr">data-text</span><span class="hl-punctuation">]</span><span class="hl-punctuation">::</span><span class="hl-selector">before</span> <span class="hl-punctuation">{</span>
+  <span class="hl-property">content</span><span class="hl-punctuation">:</span> <span class="hl-function">attr</span><span class="hl-punctuation">(</span><span class="hl-attr">data-text</span><span class="hl-punctuation">)</span><span class="hl-punctuation">;</span>
+<span class="hl-punctuation">}</span></code></pre>
+          <pre
+            class="code-block"><code><span class="hl-tag">&lt;span</span> <span class="hl-attr">data-text</span><span class="hl-punctuation">=</span><span class="hl-string">"Xin chào "</span><span class="hl-punctuation">&gt;</span>Huy Vũ<span class="hl-tag">&lt;/span&gt;</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 07. Variables -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>07. Variables (Biến)</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <p><strong>Mục đích:</strong> Khai báo biến để có thể sử dụng được ở nhiều nơi.</p>
+
+          <h2>Biến Global (Toàn cục)</h2>
+          <p>Có thể sử dụng được nhiều nơi trong file CSS.</p>
+          <h3>Cách tạo:</h3>
+          <pre class="code-block"><code><span class="hl-selector">:root</span> <span class="hl-punctuation">{</span>
+  <span class="hl-variable">--ten-bien</span><span class="hl-punctuation">:</span> <span class="hl-value">giá trị</span><span class="hl-punctuation">;</span>
+  <span class="hl-variable">--gray</span><span class="hl-punctuation">:</span> <span class="hl-string">#333333</span><span class="hl-punctuation">;</span>
+  <span class="hl-variable">--white</span><span class="hl-punctuation">:</span> <span class="hl-string">#ffffff</span><span class="hl-punctuation">;</span>
+<span class="hl-punctuation">}</span></code></pre>
+          <h3>Cách sử dụng:</h3>
+          <pre class="code-block"><code><span class="hl-selector">body</span> <span class="hl-punctuation">{</span>
+  <span class="hl-property">color</span><span class="hl-punctuation">:</span> <span class="hl-function">var</span><span class="hl-punctuation">(</span><span class="hl-variable">--gray</span><span class="hl-punctuation">)</span><span class="hl-punctuation">;</span>
+  <span class="hl-property">background-color</span><span class="hl-punctuation">:</span> <span class="hl-function">var</span><span class="hl-punctuation">(</span><span class="hl-variable">--white</span><span class="hl-punctuation">)</span><span class="hl-punctuation">;</span>
+<span class="hl-punctuation">}</span></code></pre>
+
+          <h2>Biến Local (Cục bộ)</h2>
+          <p>Chỉ sử dụng được ở trong phạm vi của nó.</p>
+          <h3>Ví dụ:</h3>
+          <pre class="code-block"><code><span class="hl-selector">h1</span> <span class="hl-punctuation">{</span>
+  <span class="hl-variable">--local-color</span><span class="hl-punctuation">:</span> <span class="hl-value">blue</span><span class="hl-punctuation">;</span>
+  <span class="hl-property">color</span><span class="hl-punctuation">:</span> <span class="hl-function">var</span><span class="hl-punctuation">(</span><span class="hl-variable">--local-color</span><span class="hl-punctuation">)</span><span class="hl-punctuation">;</span>
+<span class="hl-punctuation">}</span>
+
+<span class="hl-selector">p</span> <span class="hl-punctuation">{</span>
+  <span class="hl-property">color</span><span class="hl-punctuation">:</span> <span class="hl-function">var</span><span class="hl-punctuation">(</span><span class="hl-variable">--local-color</span><span class="hl-punctuation">)</span><span class="hl-comment"> /* Không hoạt động */</span>
+<span class="hl-punctuation">}</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 08. Box Sizing -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>08. Box Sizing (Kích thước hộp)</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <p>Mặc định khi sử dụng thuộc tính <code>width</code>, <code>height</code> thì chỉ áp dụng cho phần content
+            của 1 element.</p>
+          <h2>2 loại box-sizing:</h2>
+
+          <h3><code>content-box</code> (Mặc định)</h3>
+          <ul>
+            <li>Width/height chỉ bao gồm "nội dung" của phần tử</li>
+            <li><code>width, height = content</code></li>
+          </ul>
+
+          <h3><code>border-box</code></h3>
+          <ul>
+            <li>Width/height bao gồm: content, padding, border của phần tử</li>
+            <li><code>width, height = content + padding + border</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 09. Khái niệm Responsive -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>09. Khái niệm Responsive</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <p><strong>Responsive</strong> là để chỉ một website có thể hiển thị tương thích trên mọi thiết bị, như máy
+            tính, máy tính bảng, điện thoại.</p>
+          <p><strong>Sử dụng media query</strong> để responsive giao diện.</p>
+
+          <h2>Khai báo meta viewport:</h2>
+          <pre
+            class="code-block"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</code></pre>
+          <h3>Trong đó:</h3>
+          <ul>
+            <li><code>viewport</code>: Giúp trình duyệt hiểu thẻ meta này dùng để thiết lập khung nhìn</li>
+            <li><code>width=device-width</code>: Đặt chiều rộng bằng chiều rộng thiết bị</li>
+            <li><code>initial-scale=1.0</code>: Mức thu phóng của website (thường được đặt bằng 1)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 10. Media Queries -->
+    <div class="slide content-slide">
+      <div class="content-header">
+        <h1>10. Media Queries</h1>
+      </div>
+      <div class="content-body">
+        <div class="content-section">
+          <p><code>@media</code> CSS là một tính năng mới của CSS3. Tính năng này cho phép tùy chỉnh CSS cho nhiều thiết
+            bị khác nhau từ máy tính cho đến iPad, điện thoại và các thiết bị in ấn.</p>
+
+          <h2>Cú pháp:</h2>
+          <pre class="code-block"><code><span class="hl-keyword">@media</span> <span class="hl-variable">mediaType</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-variable">mediafeature</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span></code></pre>
+
+          <h2>MediaType:</h2>
+          <ul>
+            <li><code><span class="hl-value">all</span></code>: Dùng cho mọi thiết bị</li>
+            <li><code><span class="hl-value">print</span></code>: Dùng cho máy in</li>
+            <li><code><span class="hl-value">screen</span></code>: Dùng cho máy tính và các thiết bị di động</li>
+          </ul>
+
+          <h2>MediaFeature:</h2>
+          <ul>
+            <li><code><span class="hl-property">max-width</span></code>: Chiều rộng tối đa của viewport</li>
+            <li><code><span class="hl-property">min-width</span></code>: Chiều rộng tối thiểu của viewport</li>
+          </ul>
+
+          <h2>PC First (Responsive)</h2>
+          <p>Lập trình giao diện từ màn hình to đến màn hình nhỏ. Sử dụng <code><span
+                class="hl-property">max-width</span></code> trong media query.</p>
+          <pre class="code-block"><code><span class="hl-comment">/* iPad ngang (1024 x 768) */</span>
+<span class="hl-keyword">@media</span> <span class="hl-value">screen</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-property">max-width</span><span class="hl-punctuation">:</span> <span class="hl-number">1024</span><span class="hl-variable">px</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span>
+
+<span class="hl-comment">/* iPad dọc (768 x 1024) */</span>
+<span class="hl-keyword">@media</span> <span class="hl-value">screen</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-property">max-width</span><span class="hl-punctuation">:</span> <span class="hl-number">768</span><span class="hl-variable">px</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span>
+
+<span class="hl-comment">/* Smart phone (480 x 640) */</span>
+<span class="hl-keyword">@media</span> <span class="hl-value">screen</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-property">max-width</span><span class="hl-punctuation">:</span> <span class="hl-number">480</span><span class="hl-variable">px</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span>
+
+<span class="hl-comment">/* Smart phone nhỏ */</span>
+<span class="hl-keyword">@media</span> <span class="hl-value">screen</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-property">max-width</span><span class="hl-punctuation">:</span> <span class="hl-number">320</span><span class="hl-variable">px</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span></code></pre>
+
+          <h2>Mobile First</h2>
+          <p>Lập trình giao diện từ màn hình nhỏ đến màn hình to. Sử dụng <code><span
+                class="hl-property">min-width</span></code> trong media query.</p>
+          <pre class="code-block"><code><span class="hl-comment">/* Smart phone nhỏ */</span>
+<span class="hl-keyword">@media</span> <span class="hl-value">screen</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-property">min-width</span><span class="hl-punctuation">:</span> <span class="hl-number">320</span><span class="hl-variable">px</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span>
+
+<span class="hl-comment">/* Smart phone (480 x 640) */</span>
+<span class="hl-keyword">@media</span> <span class="hl-value">screen</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-property">min-width</span><span class="hl-punctuation">:</span> <span class="hl-number">480</span><span class="hl-variable">px</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span>
+
+<span class="hl-comment">/* iPad dọc (768 x 1024) */</span>
+<span class="hl-keyword">@media</span> <span class="hl-value">screen</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-property">min-width</span><span class="hl-punctuation">:</span> <span class="hl-number">768</span><span class="hl-variable">px</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span>
+
+<span class="hl-comment">/* iPad ngang (1024 x 768) */</span>
+<span class="hl-keyword">@media</span> <span class="hl-value">screen</span> <span class="hl-keyword">and</span> <span class="hl-punctuation">(</span><span class="hl-property">min-width</span><span class="hl-punctuation">:</span> <span class="hl-number">1024</span><span class="hl-variable">px</span><span class="hl-punctuation">)</span> <span class="hl-punctuation">{</span>
+  <span class="hl-comment">/* Code */</span>
+<span class="hl-punctuation">}</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-counter">
+    <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
+  </div>
+  <div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">
+      ← Trước
+    </button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+      Tiếp →
+    </button>
+  </div>
+  <script>
+    let currentSlideIndex = 0;
+    let slides = document.querySelectorAll(".slide");
+    const totalSlides = slides.length;
+
+    function updateSlideDisplay() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove("active");
+        if (index === currentSlideIndex) {
+          slide.classList.add("active");
+        }
+      });
+      document.getElementById("currentSlide").textContent =
+        currentSlideIndex + 1;
+      document.getElementById("totalSlides").textContent = totalSlides;
+      const progressBar = document.getElementById("progressBar");
+      const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
+      progressBar.style.width = progress + "%";
+      document.getElementById("prevBtn").disabled = currentSlideIndex === 0;
+      document.getElementById("nextBtn").disabled =
+        currentSlideIndex === totalSlides - 1;
+    }
+
+    function changeSlide(direction) {
+      const newIndex = currentSlideIndex + direction;
+      if (newIndex >= 0 && newIndex < totalSlides) {
+        currentSlideIndex = newIndex;
+        updateSlideDisplay();
+      }
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") changeSlide(-1);
+      if (e.key === "ArrowRight") changeSlide(1);
+      if (e.key === "Home") {
+        currentSlideIndex = 0;
+        updateSlideDisplay();
+      }
+      if (e.key === "End") {
+        currentSlideIndex = totalSlides - 1;
+        updateSlideDisplay();
+      }
+    });
+    updateSlideDisplay();
+  </script>
+</body>
+
+</html>

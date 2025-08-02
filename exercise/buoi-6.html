@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub - Trung tâm Công nghệ</title>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #ecf0f1;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reset và base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .header::before {
+            content: attr(data-subtitle);
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: min(1200px, 90vw);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: max(1.5rem, 4vw);
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: calc(2rem + 2vw);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Main content */
+        .main {
+            padding: 3rem 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card[data-category="web"]::before {
+            content: "🌐";
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card[data-category="mobile"]::before {
+            content: "📱";
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card[data-category="ai"]::before {
+            content: "🤖";
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Stats section */
+        .stats {
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            color: var(--white);
+            padding: 3rem 0;
+            margin: 3rem 0;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Pricing section */
+        .pricing {
+            padding: 3rem 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card[data-popular="true"] {
+            border: 3px solid var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .pricing-card[data-popular="true"]::before {
+            content: "PHỔ BIẾN NHẤT";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.8rem;
+            transform: rotate(45deg);
+        }
+
+        .price {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--secondary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+        }
+
+        .btn-accent:hover {
+            background: #c0392b;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        /* Floating elements */
+        .floating-box {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            width: 200px;
+            text-align: center;
+        }
+
+        .floating-box h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design - PC First */
+        
+        /* iPad ngang (1024px) */
+        @media screen and (max-width: 1024px) {
+            .container {
+                max-width: 95vw;
+            }
+            
+            .floating-box {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: calc(1.8rem + 1.5vw);
+            }
+        }
+
+        /* iPad dọc (768px) */
+        @media screen and (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                gap: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-card[data-popular="true"] {
+                transform: none;
+                border-width: 2px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Smart phone (480px) */
+        @media screen and (max-width: 480px) {
+            .hero {
+                padding: 1rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Smart phone nhỏ (320px) */
+        @media screen and (max-width: 320px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .feature-card {
+                padding: 1rem;
+            }
+            
+            .pricing-card {
+                padding: 1.5rem;
+            }
+            
+            .price {
+                font-size: 2rem;
+            }
+        }
+
+        /* Attribute-based styling examples */
+        [data-theme="dark"] {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        [class^="icon-"] {
+            font-weight: bold;
+        }
+
+        [class$="-highlight"] {
+            background-color: #f39c12;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        [class*="special"] {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        /* Animation effects */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <header class="header" data-subtitle="Công nghệ hiện đại">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">TechHub</div>
+                <ul class="nav-menu">
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="#services">Dịch vụ</a></li>
+                    <li><a href="#pricing">Bảng giá</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
+            <div class="hero">
+                <h1>Giải pháp Công nghệ Toàn diện</h1>
+                <p>Chúng tôi cung cấp các dịch vụ công nghệ hàng đầu cho doanh nghiệp của bạn</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h2 class="section-title">Dịch vụ của chúng tôi</h2>
+            
+            <div class="features">
+                <div class="feature-card" data-category="web">
+                    <h3>Phát triển Web</h3>
+                    <p>Tạo ra những trang web hiện đại, responsive và tối ưu SEO cho doanh nghiệp của bạn.</p>
+                    <a href="#" class="btn">Tìm hiểu thêm</a>
+                </div>
+                
+                <div class="feature-card" data-category="mobile">
+                    <h3>Ứng dụng Di động</h3>
+                    <p>Phát triển ứng dụng iOS và Android với trải nghiệm người dùng tuyệt vời.</p>
+                    <a href="#" class="btn">Tìm hiểu thêm</a>
+                </div>
+                
+                <div class="feature-card" data-category="ai">
+                    <h3>Trí tuệ Nhân tạo</h3>
+                    <p>Tích hợp AI và Machine Learning vào quy trình kinh doanh của bạn.</p>
+                    <a href="#" class="btn">Tìm hiểu thêm</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Dự án hoàn thành</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Khách hàng hài lòng</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Năm kinh nghiệm</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Hỗ trợ khách hàng</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Bảng giá Dịch vụ</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Gói Cơ bản</h3>
+                    <div class="price">$299</div>
+                    <ul style="list-style: none; margin: 1rem 0;">
+                        <li>✓ Website responsive</li>
+                        <li>✓ Tối ưu SEO cơ bản</li>
+                        <li>✓ Hỗ trợ 3 tháng</li>
+                    </ul>
+                    <a href="#" class="btn">Chọn gói</a>
+                </div>
+                
+                <div class="pricing-card" data-popular="true">
+                    <h3>Gói Nâng cao</h3>
+                    <div class="price">$599</div>
+                    <ul style="list-style: none; margin: 1rem 0;">
+                        <li>✓ Website + Ứng dụng mobile</li>
+                        <li>✓ Tối ưu SEO nâng cao</li>
+                        <li>✓ Hỗ trợ 6 tháng</li>
+                        <li>✓ Dashboard quản trị</li>
+                    </ul>
+                    <a href="#" class="btn btn-accent">Chọn gói</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Gói Doanh nghiệp</h3>
+                    <div class="price">$999</div>
+                    <ul style="list-style: none; margin: 1rem 0;">
+                        <li>✓ Giải pháp toàn diện</li>
+                        <li>✓ Tích hợp AI</li>
+                        <li>✓ Hỗ trợ 1 năm</li>
+                        <li>✓ Đào tạo nhân viên</li>
+                    </ul>
+                    <a href="#" class="btn">Liên hệ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2024 TechHub. Tất cả quyền được bảo lưu.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="icon-facebook">Facebook</a>
+                    <a href="#" class="icon-twitter">Twitter</a>
+                    <a href="#" class="icon-linkedin">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="floating-box">
+        <h4>Liên hệ ngay!</h4>
+        <p>Nhận tư vấn miễn phí</p>
+        <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Gọi ngay</a>
+    </div>
+</body>
+</html>
